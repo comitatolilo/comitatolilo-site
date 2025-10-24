@@ -9,16 +9,12 @@
     :root{
       --primary-color:#ffffff; --background-color:#000; --surface-color:#111; --text-color:#fff;
       --box-shadow:0 4px 20px rgba(0,0,0,.2); --shadow:rgba(0,0,0,.45); --link:#7bd4ff;
-
-      --card-bg:#000;     /* sezione/box in dark */
-      --card-fg:#fff;
+      --card-bg:#000; --card-fg:#fff;
     }
     [data-theme="light"]{
       --primary-color:#101010; --background-color:#fafafa; --surface-color:#fff; --text-color:#121212;
       --box-shadow:0 4px 20px rgba(0,0,0,.07); --shadow:rgba(0,0,0,.12); --link:#0066cc;
-
-      --card-bg:#ffffff;  /* sezione/box in light */
-      --card-fg:#111111;
+      --card-bg:#ffffff; --card-fg:#111111;
     }
 
     html,body{margin:0;background:var(--background-color);color:var(--text-color);font-family:'Poppins',sans-serif}
@@ -27,6 +23,11 @@
     .brand a{font-weight:600; text-decoration:none; color:var(--text-color)}
     .iconbtn{all:unset; cursor:pointer; padding:.55rem .7rem; border-radius:.8rem}
     .iconbtn:hover{background:#ffffff10} [data-theme="light"] .iconbtn:hover{background:#00000008}
+
+    /* loader */
+    #loading-screen{position:fixed; inset:0; background:var(--background-color); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:1; transition:opacity .35s ease}
+    #loading-logo{background-image:url(/img/logo-comitatolilo.png); width:160px; height:160px; border-radius:50%; background-size:cover; background-position:center; animation:pulse .5s ease-in-out 4 alternate}
+    @keyframes pulse{from{transform:scale(1)} to{transform:scale(1.06)}}
 
     .main{padding-top:80px; display:grid; place-items:center}
     .card{width:min(880px,92vw); background:var(--card-bg); color:var(--card-fg); border-radius:14px; box-shadow:var(--box-shadow); padding:1.6rem}
@@ -45,9 +46,18 @@
     .side-links{display:flex;flex-direction:column;gap:.5rem;padding:10px 4px}
     .side-links a{color:var(--text-color);text-decoration:none;padding:.7rem .9rem;border-radius:.8rem;border:1px solid #ffffff08}
     .side-links a:hover{background:#ffffff10;border-color:#ffffff22} [data-theme="light"] .side-links a:hover{background:#00000008;border-color:#00000010}
+
+    /* footer */
+    footer{ margin:24px auto; max-width:980px; padding:16px 20px; color:var(--text-color-secondary,#888);
+      display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between; }
+    .footer-links{display:flex; gap:14px; flex-wrap:wrap}
+    .footer-links a{color:var(--text-color-secondary,#888); text-decoration:none}
+    .footer-links a:hover{text-decoration:underline}
   </style>
 </head>
 <body>
+  <div id="loading-screen"><div id="loading-logo"></div></div>
+
   <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
@@ -77,7 +87,6 @@
       <div class="row">
         <div class="item">
           <strong>Email</strong>
-          <!-- niente email in chiaro: solo un bottone che apre mailto -->
           <a href="mailto:comitatolilo@gmail.com" rel="nofollow">Scrivici via email</a>
         </div>
         <div class="item">
@@ -92,32 +101,39 @@
     </section>
   </main>
 
+  <footer>
+    <div class="footer-links">
+      <a href="/termini.html">Termini & Condizioni</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/imprint.html">Imprint</a>
+    </div>
+    <div>© Comitato Studenti Liceo Locarno</div>
+  </footer>
+
   <script>
-    // Inizializzazione tema: sistema -> utente (se scelto)
+    // Tema iniziale
     (function initTheme(){
       const root = document.documentElement;
       const stored = localStorage.getItem('theme');
-      if (stored === 'light' || stored === 'dark') {
-        root.setAttribute('data-theme', stored);
-      } else {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-      }
+      if (stored === 'light' || stored === 'dark') root.setAttribute('data-theme', stored);
+      else root.setAttribute('data-theme', (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      mq.addEventListener?.('change', e => {
-        if (!localStorage.getItem('theme')) {
-          document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
-      });
+      mq.addEventListener?.('change', e => { if (!localStorage.getItem('theme')) document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light'); });
     })();
 
-    const root=document.documentElement;
-    document.getElementById('themeToggle').addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('theme',next)});
+    // Loader rapidissimo
+    const loader = document.getElementById('loading-screen');
+    window.addEventListener('load', ()=>{ setTimeout(()=>{ loader.style.opacity='0'; setTimeout(()=> loader.style.display='none', 300); }, 200); });
 
+    // Menu
     const sb=document.getElementById('sidebar'); 
     document.getElementById('openMenu').addEventListener('click',()=>{sb.classList.add('open'); sb.setAttribute('aria-hidden','false')});
     document.getElementById('closeMenu').addEventListener('click',()=>{sb.classList.remove('open'); sb.setAttribute('aria-hidden','true')});
     document.addEventListener('keydown',e=>{if(e.key==='Escape') sb.classList.remove('open')});
+
+    // Toggle tema
+    const root=document.documentElement;
+    document.getElementById('themeToggle').addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('theme',next)});
   </script>
 </body>
 </html>
