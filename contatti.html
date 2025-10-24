@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contatti – Comitato Lilo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{ --primary-color:#ffffff; --background-color:#000; --surface-color:#111; --text-color:#fff; --box-shadow:0 4px 20px rgba(0,0,0,.2); --shadow:rgba(0,0,0,.45); --link:#7bd4ff }
+    [data-theme="light"]{ --primary-color:#101010; --background-color:#fafafa; --surface-color:#fff; --text-color:#121212; --box-shadow:0 4px 20px rgba(0,0,0,.07); --shadow:rgba(0,0,0,.12); --link:#0066cc }
+    html,body{margin:0;background:var(--background-color);color:var(--text-color);font-family:'Poppins',sans-serif}
+    .header{position:fixed; inset:0 0 auto 0; height:64px; display:flex; align-items:center; justify-content:space-between; background:var(--surface-color); box-shadow:var(--box-shadow); padding:0 .75rem; z-index:1000}
+    .iconbtn{all:unset; cursor:pointer; padding:.55rem .7rem; border-radius:.8rem}
+    .iconbtn:hover{background:#ffffff10} [data-theme="light"] .iconbtn:hover{background:#00000008}
+    .main{padding-top:80px; display:grid; place-items:center}
+    .card{width:min(880px,92vw); background:var(--surface-color); border-radius:14px; box-shadow:var(--box-shadow); padding:1.6rem}
+    h1{margin:.2rem 0 1rem}
+    a{color:var(--link); text-decoration:none} a:hover{text-decoration:underline}
+    .row{display:grid; gap:12px}
+    .item{padding:1rem 1.2rem; border:1px solid #ffffff10; border-radius:.9rem}
+    .item strong{display:block; margin-bottom:.25rem}
+    @media (min-width:760px){ .row{grid-template-columns:repeat(2,1fr)} }
+    /* sidebar quick */
+    .sidebar{position:fixed;top:0;left:0;height:100dvh;width:min(290px,85vw);background:var(--surface-color);box-shadow:0 0 40px var(--shadow);transform:translateX(-100%);transition:transform .28s;z-index:1100;display:flex;flex-direction:column;padding:14px}
+    .sidebar.open{transform:translateX(0)}
+    .side-header{display:flex;align-items:center;justify-content:space-between;padding:6px 4px}
+    .side-links{display:flex;flex-direction:column;gap:.5rem;padding:10px 4px}
+    .side-links a{color:var(--text-color);text-decoration:none;padding:.7rem .9rem;border-radius:.8rem;border:1px solid #ffffff08}
+    .side-links a:hover{background:#ffffff10;border-color:#ffffff22} [data-theme="light"] .side-links a:hover{background:#00000008;border-color:#00000010}
+  </style>
+</head>
+<body>
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="side-header">
+      <div style="font-weight:600;display:flex;align-items:center;gap:.5rem"><span style="width:10px;height:10px;border-radius:50%;background:#00c2ff;box-shadow:0 0 18px #00c2ff88"></span> Comitato Lilo</div>
+      <button id="closeMenu" class="iconbtn" aria-label="Chiudi menu">✕</button>
+    </div>
+    <nav class="side-links">
+      <a href="/">Home</a>
+      <a href="/liltalks/index.html">LiLtalks</a>
+      <a href="/cinelilo/index.html">CineLiLo</a>
+      <a href="/feste/index.html">Biglietti / Feste</a>
+      <a href="/autogestite/autogestite.html">Autogestite</a>
+      <a href="/contatti.html">Contatti</a>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
+    <div style="font-weight:600">Contatti</div>
+    <button id="themeToggle" class="iconbtn" aria-label="Cambia tema">🌓</button>
+  </header>
+
+  <main class="main">
+    <section class="card">
+      <h1>Contatti</h1>
+      <div class="row">
+        <div class="item"><strong>Email</strong><a href="mailto:comitatolilo@gmail.com">comitatolilo@gmail.com</a></div>
+        <div class="item"><strong>Instagram</strong><a href="https://www.instagram.com/lil.octopuss" target="_blank" rel="noopener"> @lil.octopuss</a></div>
+        <div class="item"><strong>WhatsApp</strong><span>Unisciti alla community dal link su Instagram</span></div>
+        <div class="item"><strong>Biglietti / Eventi</strong><a href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">tickets.comitatolilo.ch</a></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const root=document.documentElement;
+    const stored=localStorage.getItem('theme'); if(stored){root.setAttribute('data-theme',stored)}
+    document.getElementById('themeToggle').addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('theme',next)});
+    const sb=document.getElementById('sidebar'); document.getElementById('openMenu').addEventListener('click',()=>{sb.classList.add('open'); sb.setAttribute('aria-hidden','false')});
+    document.getElementById('closeMenu').addEventListener('click',()=>{sb.classList.remove('open'); sb.setAttribute('aria-hidden','true')});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape') sb.classList.remove('open')});
+  </script>
+</body>
+</html>
