@@ -6,8 +6,21 @@
   <title>Contatti – Comitato Liceo Locarno</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root{ --primary-color:#ffffff; --background-color:#000; --surface-color:#111; --text-color:#fff; --box-shadow:0 4px 20px rgba(0,0,0,.2); --shadow:rgba(0,0,0,.45); --link:#7bd4ff }
-    [data-theme="light"]{ --primary-color:#101010; --background-color:#fafafa; --surface-color:#fff; --text-color:#121212; --box-shadow:0 4px 20px rgba(0,0,0,.07); --shadow:rgba(0,0,0,.12); --link:#0066cc }
+    :root{
+      --primary-color:#ffffff; --background-color:#000; --surface-color:#111; --text-color:#fff;
+      --box-shadow:0 4px 20px rgba(0,0,0,.2); --shadow:rgba(0,0,0,.45); --link:#7bd4ff;
+
+      --card-bg:#000;     /* sezione/box in dark */
+      --card-fg:#fff;
+    }
+    [data-theme="light"]{
+      --primary-color:#101010; --background-color:#fafafa; --surface-color:#fff; --text-color:#121212;
+      --box-shadow:0 4px 20px rgba(0,0,0,.07); --shadow:rgba(0,0,0,.12); --link:#0066cc;
+
+      --card-bg:#ffffff;  /* sezione/box in light */
+      --card-fg:#111111;
+    }
+
     html,body{margin:0;background:var(--background-color);color:var(--text-color);font-family:'Poppins',sans-serif}
 
     .header{position:fixed; inset:0 0 auto 0; height:64px; display:flex; align-items:center; justify-content:space-between; background:var(--surface-color); box-shadow:var(--box-shadow); padding:0 .75rem; z-index:1000}
@@ -16,7 +29,7 @@
     .iconbtn:hover{background:#ffffff10} [data-theme="light"] .iconbtn:hover{background:#00000008}
 
     .main{padding-top:80px; display:grid; place-items:center}
-    .card{width:min(880px,92vw); background:var(--surface-color); border-radius:14px; box-shadow:var(--box-shadow); padding:1.6rem}
+    .card{width:min(880px,92vw); background:var(--card-bg); color:var(--card-fg); border-radius:14px; box-shadow:var(--box-shadow); padding:1.6rem}
     h1{margin:.2rem 0 1rem}
     a{color:var(--link); text-decoration:none} a:hover{text-decoration:underline}
     .row{display:grid; gap:12px}
@@ -80,10 +93,29 @@
   </main>
 
   <script>
+    // Inizializzazione tema: sistema -> utente (se scelto)
+    (function initTheme(){
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') {
+        root.setAttribute('data-theme', stored);
+      } else {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      mq.addEventListener?.('change', e => {
+        if (!localStorage.getItem('theme')) {
+          document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
+      });
+    })();
+
     const root=document.documentElement;
-    const stored=localStorage.getItem('theme'); if(stored){root.setAttribute('data-theme',stored)}
     document.getElementById('themeToggle').addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('theme',next)});
-    const sb=document.getElementById('sidebar'); document.getElementById('openMenu').addEventListener('click',()=>{sb.classList.add('open'); sb.setAttribute('aria-hidden','false')});
+
+    const sb=document.getElementById('sidebar'); 
+    document.getElementById('openMenu').addEventListener('click',()=>{sb.classList.add('open'); sb.setAttribute('aria-hidden','false')});
     document.getElementById('closeMenu').addEventListener('click',()=>{sb.classList.remove('open'); sb.setAttribute('aria-hidden','true')});
     document.addEventListener('keydown',e=>{if(e.key==='Escape') sb.classList.remove('open')});
   </script>
