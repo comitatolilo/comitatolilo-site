@@ -1,462 +1,258 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comitato Liceo Locarno</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #ffffff;
-            --accent-color: #333333;
-            --background-color: #000000;
-            --surface-color: #111111;
-            --text-color: #ffffff;
-            --text-color-secondary: #666666;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --liloscambio-color: #ba454f;
-        }
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-        .header {
-            background-color: var(--surface-color);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--box-shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        .no-animation {
-            animation: none !important;
-            opacity: 1 !important;
-            transform: none !important;
-        }
-        .animate-in {
-            animation: fadeIn 1s ease-in-out;
-        }
-        .main-content {
-            padding-top: 80px;
-        }
-        .main-title {
-            text-align: center;
-            font-size: 4rem;
-            font-weight: 600;
-            margin: 3rem 0;
-            color: var(--primary-color);
-            opacity: 0;
-            animation: slideInFromTop 1s ease-in-out 2.5s forwards;
-        }
-        .content-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--surface-color);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out 3s forwards;
-        }
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            padding: 2.5rem;
-            background-color: var(--surface-color);
-        }
-        .button-logo {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        /* Pulsante LiLoScambio */
-        .liloscambio-container {
-            margin: 0 2.5rem 2.5rem 2.5rem;
-            border: 2px solid var(--liloscambio-color);
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: #000000;
-            position: relative;
-        }
-        .big-button {
-            display: flex;
-            align-items: center;
-            padding: 2rem;
-            cursor: pointer;
-            color: #fff;
-            height: 100px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .big-button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background-color: var(--liloscambio-color);
-            transition: all 0.5s ease;
-            z-index: -1;
-        }
-        .big-button:hover:before {
-            left: 0;
-        }
-        .big-button-logo {
-            width: 80px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        .big-button-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-        }
-        .big-button-content {
-            flex: 1;
-            z-index: 2;
-        }
-        .big-button-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            background: linear-gradient(90deg, #ffffff, var(--liloscambio-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-        }
-        .big-button:hover .big-button-title {
-            background: linear-gradient(90deg, #ffffff, #ffffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .big-button-description {
-            font-size: 0.9rem;
-            color: #ddd;
-            margin-top: 5px;
-            max-width: 450px;
-            transition: all 0.3s ease;
-        }
-        .big-button:hover .big-button-description {
-            color: #ffffff;
-        }
-        /* Image container styles */
-        .immagine_liltalks {
-            width: 150px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-        }
-        .immagine_liltalks img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--background-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 3s ease;
-        }
-        #loading-logo, .logo {
-            background-image: url(foto_profilo_lilo_LE_upscale_balanced_x4.jpeg);
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            animation: pulse 0.8s infinite alternate;
-        }
-        .logo {
-            border-radius: 50%;
-            background-image: url(foto_profilo_lilo_LE_upscale_balanced_x4.jpeg);
-            margin: auto;
-            box-shadow: 0px 0px 200px var(--shadow);
-            transition: transform 3s ease;
-            opacity: 0;
-            animation: fadeIn 1.5s forwards 3s, slideDown 2s forwards 1.5s;
-        }
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        .nav-button-liltalks, .nav-button-cinelilo, .nav-button-feste, .nav-button-sezione4 {
-            position: relative;
-            background-color: #000000;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            color: #fff;
-            z-index: 1;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .nav-button-liltalks { border-color: #4a90e2; }
-        .nav-button-cinelilo { border-color: rgb(216, 19, 19); }
-        .nav-button-feste { border-color: #BB86FC; }
-        .nav-button-sezione4 { border-color: #8B4513; }
-        .nav-button-liltalks:before, .nav-button-liltalks:after { background-color: #4a90e2; }
-        .nav-button-cinelilo:before, .nav-button-cinelilo:after { background-color: rgb(216, 19, 19); }
-        .nav-button-feste:before, .nav-button-feste:after { background-color: #BB86FC; }
-        .nav-button-sezione4:before, .nav-button-sezione4:after { background-color: #8B4513; }
-        [class^="nav-button-"]:before, [class^="nav-button-"]:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            z-index: -1;
-        }
-        [class^="nav-button-"]:before {
-            left: -20px;
-            transform: translate(-50%, -50%);
-        }
-        [class^="nav-button-"]:after {
-            right: -20px;
-            transform: translate(50%, -50%);
-        }
-        [class^="nav-button-"]:hover:before {
-            animation: criss-cross-left 0.8s both;
-            animation-direction: alternate;
-        }
-        [class^="nav-button-"]:hover:after {
-            animation: criss-cross-right 0.8s both;
-            animation-direction: alternate;
-        }
-        .contact-box {
-            padding: 2rem;
-            text-align: center;
-        }
-        .contact-box a {
-            color: var(--text-color);
-            text-decoration: none;
-        }
-        .contact-box a:hover {
-            text-decoration: underline;
-        }
-        @keyframes pulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideInFromTop {
-            from { 
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to { 
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        @keyframes criss-cross-left {
-            0% {
-                left: -20px;
-                width: 20px;
-                height: 20px;
-            }
-            50% {
-                left: 50%;
-                width: 20px;
-                height: 20px;
-            }
-            100% {
-                left: 50%;
-                width: 500px;
-                height: 500px;
-                opacity: 1;
-            }
-        }
-        @keyframes criss-cross-right {
-            0% {
-                right: -20px;
-                width: 20px;
-                height: 20px;
-            }
-            50% {
-                right: 50%;
-                width: 20px;
-                height: 20px;
-            }
-            100% {
-                right: 50%;
-                width: 500px;
-                height: 500px;
-                opacity: 1;
-            }
-        }
-        @media (max-width: 768px) {
-            .button-grid {
-                padding: 1rem;
-                gap: 10px;
-            }
-            .nav-button-liltalks,
-            .nav-button-cinelilo,
-            .nav-button-feste,
-            .nav-button-sezione4 {
-                padding: 1rem;
-                height: 150px;
-            }
-            .immagine_liltalks {
-                width: 100px;
-                height: 100px;
-            }
-            .main-title {
-                font-size: 2rem;
-            }
-            .liloscambio-container {
-                margin: 0 1rem 1rem 1rem;
-            }
-            .big-button {
-                padding: 1rem;
-                height: auto;
-                flex-direction: column;
-                text-align: center;
-            }
-            .big-button-logo {
-                width: 60px;
-                height: 60px;
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            .big-button-title {
-                font-size: 1.4rem;
-            }
-            .big-button-description {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Comitato Liceo Locarno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --primary-color:#ffffff; --accent-color:#333333;
+      --background-color:#000000; --surface-color:#111111;
+      --text-color:#ffffff; --text-color-secondary:#bbbbbb;
+      --box-shadow:0 4px 6px rgba(0,0,0,.2);
+      --liloscambio-color:#ba454f; --shadow:rgba(0,0,0,.45);
+      --link:#7bd4ff;
+    }
+    /* tema chiaro */
+    [data-theme="light"]{
+      --primary-color:#101010; --accent-color:#e9e9e9;
+      --background-color:#fafafa; --surface-color:#ffffff;
+      --text-color:#121212; --text-color-secondary:#555;
+      --box-shadow:0 4px 20px rgba(0,0,0,.07);
+      --liloscambio-color:#ba454f; --shadow:rgba(0,0,0,.12);
+      --link:#0066cc;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:'Poppins',sans-serif;line-height:1.6;background:var(--background-color);color:var(--text-color);overflow-x:hidden}
+
+    /* HEADER */
+    .header{
+      position:fixed; inset:0 0 auto 0; height:64px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:var(--surface-color); box-shadow:var(--box-shadow);
+      padding:0 .75rem; z-index:1000;
+    }
+    .brand{display:flex; align-items:center; gap:.6rem; font-weight:600}
+    .brand .dot{width:10px; height:10px; border-radius:50%; background:#00c2ff; box-shadow:0 0 18px #00c2ff88}
+    .iconbtn{all:unset; cursor:pointer; padding:.55rem .7rem; border-radius:.8rem}
+    .iconbtn:hover{background:rgba(255,255,255,.06)}
+    [data-theme="light"] .iconbtn:hover{background:rgba(0,0,0,.06)}
+    .right{display:flex; align-items:center; gap:.25rem}
+
+    /* SIDEBAR */
+    .sidebar{
+      position:fixed; top:0; left:0; height:100dvh; width:min(290px,85vw);
+      background:var(--surface-color); box-shadow:0 0 40px var(--shadow);
+      transform:translateX(-100%); transition:transform .28s ease; z-index:1100;
+      display:flex; flex-direction:column; padding:14px;
+    }
+    .sidebar.open{transform:translateX(0)}
+    .side-header{display:flex; align-items:center; justify-content:space-between; padding:6px 4px}
+    .side-links{display:flex; flex-direction:column; gap:.5rem; padding:10px 4px}
+    .side-links a{
+      text-decoration:none; color:var(--text-color); padding:.7rem .9rem; border-radius:.8rem;
+      border:1px solid #ffffff08;
+    }
+    .side-links a:hover{background:#ffffff10; border-color:#ffffff22}
+    [data-theme="light"] .side-links a:hover{background:#00000008; border-color:#00000010}
+
+    /* CONTENT */
+    .main-content{padding-top:80px}
+    .main-title{
+      text-align:center; font-size:clamp(2rem,5vw,4rem); font-weight:600; margin:2.4rem 0; color:var(--primary-color);
+      opacity:0; animation:slideInFromTop 1s ease-in-out 1.8s forwards;
+    }
+    .content-container{
+      max-width:860px; margin:0 auto; background:var(--surface-color); border-radius:12px; overflow:hidden; box-shadow:var(--box-shadow);
+      opacity:0; animation:fadeIn 1s ease-in-out 2.2s forwards;
+    }
+
+    .button-grid{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:2.2rem; background:var(--surface-color);
+    }
+    .button-logo{margin:0; display:flex; justify-content:center; align-items:center}
+
+    /* Pulsante LiLoScambio (invariato di stile) */
+    .liloscambio-container{
+      margin:0 2.2rem 2.4rem 2.2rem; border:2px solid var(--liloscambio-color); border-radius:12px; overflow:hidden; background:#000; position:relative;
+    }
+    .big-button{display:flex; align-items:center; gap:18px; padding:1.6rem; cursor:pointer; color:#fff; position:relative; z-index:1; overflow:hidden; transition:.3s}
+    .big-button:before{content:''; position:absolute; inset:0; left:-100%; background:var(--liloscambio-color); transition:.5s; z-index:-1}
+    .big-button:hover:before{left:0}
+    .big-button-logo{width:80px; height:80px; display:grid; place-items:center}
+    .big-button-logo img{max-width:100%; max-height:100%; object-fit:contain; border-radius:50%}
+    .big-button-title{font-size:1.6rem; font-weight:600; background:linear-gradient(90deg,#fff,var(--liloscambio-color)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+    .big-button-description{font-size:.95rem; color:#ddd; max-width:520px}
+
+    /* Card pulsanti progetto (stile tuo, coerente) */
+    .nav-card{
+      position:relative; background:#000; border:2px solid transparent; border-radius:12px; padding:1.4rem; text-align:center;
+      transition:.3s; overflow:hidden; color:#fff; height:240px; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    }
+    .nav-card:hover{transform:translateY(-2px)}
+    .nav-card h3{margin:.6rem 0 0; font-weight:600}
+    .nav-liltalks{border-color:#4a90e2} .nav-cinelilo{border-color:#d81313} .nav-feste{border-color:#BB86FC} .nav-autog{border-color:#8B4513}
+    .nav-card .bubble:before,.nav-card .bubble:after{content:''; position:absolute; top:50%; width:20px; height:20px; border-radius:50%; z-index:-1}
+    .nav-card .bubble:before{left:-20px; transform:translate(-50%,-50%)} .nav-card .bubble:after{right:-20px; transform:translate(50%,-50%)}
+    .nav-liltalks .bubble:before,.nav-liltalks .bubble:after{background:#4a90e2}
+    .nav-cinelilo .bubble:before,.nav-cinelilo .bubble:after{background:#d81313}
+    .nav-feste   .bubble:before,.nav-feste   .bubble:after{background:#BB86FC}
+    .nav-autog   .bubble:before,.nav-autog   .bubble:after{background:#8B4513}
+    .nav-card:hover .bubble:before{animation:criss-left .8s both}
+    .nav-card:hover .bubble:after{animation:criss-right .8s both}
+
+    /* Logo/loader coerenti col tuo file */
+    #loading-screen{
+      position:fixed; inset:0; background:var(--background-color); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:1; transition:opacity .6s ease;
+    }
+    #loading-logo,.logo{
+      background-image:url(foto_profilo_lilo_LE_upscale_balanced_x4.jpeg);
+      width:220px; height:220px; border-radius:50%; background-size:cover; background-position:center; animation:pulse .8s infinite alternate;
+    }
+    .logo{margin:auto; box-shadow:0 0 200px var(--shadow); opacity:0; animation:fadeIn 1.2s forwards 2.2s, slideDown 1.6s forwards 1.2s}
+
+    a.cardlink{color:inherit; text-decoration:none}
+
+    /* Animazioni */
+    .no-animation{animation:none!important; opacity:1!important; transform:none!important}
+    @keyframes pulse{from{transform:scale(1)} to{transform:scale(1.06)}}
+    @keyframes fadeIn{from{opacity:0} to{opacity:1}}
+    @keyframes slideInFromTop{from{transform:translateY(-50px); opacity:0} to{transform:translateY(0); opacity:1}}
+    @keyframes slideDown{from{transform:translateY(-10px)} to{transform:translateY(0)}}
+    @keyframes criss-left{0%{left:-20px;width:20px;height:20px} 50%{left:50%} 100%{left:50%;width:480px;height:480px;opacity:1}}
+    @keyframes criss-right{0%{right:-20px;width:20px;height:20px} 50%{right:50%} 100%{right:50%;width:480px;height:480px;opacity:1}}
+
+    /* Responsive */
+    @media (max-width:900px){ .button-grid{grid-template-columns:1fr; padding:1.2rem} .nav-card{height:170px} .big-button{flex-direction:column; text-align:center} .big-button-logo{width:64px;height:64px} .big-button-title{font-size:1.3rem} }
+  </style>
 </head>
 <body>
-    <div id="loading-screen">
-        <div id="loading-logo"></div>
+  <!-- LOADING -->
+  <div id="loading-screen"><div id="loading-logo"></div></div>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="side-header">
+      <div class="brand"><span class="dot"></span> <span>Comitato Lilo</span></div>
+      <button class="iconbtn" id="closeMenu" aria-label="Chiudi menu">✕</button>
     </div>
-    <header class="header">
-        <div class="">Comitato Liceo</div>
-    </header>
-    <main class="main-content">
-        <div class="logo"></div>
-        <h1 class="main-title">Comitato LiLo</h1>
-        <div class="content-container">
-            <h1 style="text-align: center;">I nostri progetti</h1>
-            <p style="text-align: center;">Clicca per vederli nel dettaglio</p>
-            <div class="button-grid">
-                <a href="/liltalks/index.html" style="text-decoration: none; color: inherit;">
-                    <div class="nav-button-liltalks">
-                        <div class="immagine_liltalks">
-                            <img src="/IMG-20241022-WA0013-removebg-preview.png" alt="LilTalks">
-                        </div>
-                        <h3>LilTalks</h3>
-                    </div>
-                </a>
-                <a href="feste/index.php" style="text-decoration: none; color: inherit;">
-                    <div class="nav-button-feste">
-                        <div class="button-logo">
-                        </div>
-                        <h3 style="color: #BB86FC; text-align: left; text-transform: uppercase; font-size: 35px; line-height: 0.9; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-weight: 800; position: relative; z-index: 2;">VENDITA<br>BIGLIETTI<br>FESTE</h3>
-                    </div>
-                </a>
-                <a href="/cinelilo/index.html" style="text-decoration: none; color: inherit;">
-                    <div class="nav-button-cinelilo">
-                        <div class="immagine_liltalks">
-                            <img src="Progetti-1-1-removebg-preview.png" alt="CineLiLo">
-                        </div>
-                        <h3>CineLiLo</h3>
-                    </div>
-                </a>    
-                <a href="/autugestite/autogestite.html" style="text-decoration: none; color: inherit;">
-                    <div class="nav-button-sezione4">
-                        <div class="immagine_liltalks">
-                            <img src="dante-modified.png" alt="Autogestite">
-                        </div>
-                        <h3>Autogestite</h3>
-                    </div>
-                </a>
+    <nav class="side-links">
+      <a href="/">Home</a>
+      <a href="/liltalks/index.html">LiLtalks</a>
+      <a href="/cinelilo/index.html">CineLiLo</a>
+      <a href="/feste/index.html">Biglietti / Feste</a>
+      <a href="/autogestite/autogestite.html">Autogestite</a>
+      <a href="/contatti.html">Contatti</a>
+    </nav>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="header">
+    <button class="iconbtn" id="openMenu" aria-label="Apri menu">☰</button>
+    <div class="brand" aria-hidden="true"><span class="dot"></span><span>Comitato Liceo</span></div>
+    <div class="right">
+      <button class="iconbtn" id="themeToggle" aria-label="Cambia tema">🌓</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="logo"></div>
+    <h1 class="main-title">Comitato LiLo</h1>
+
+    <div class="content-container">
+      <h1 style="text-align:center; margin:1.4rem 0 .2rem">I nostri progetti</h1>
+      <p style="text-align:center; margin:0 0 1.4rem">Clicca per vederli nel dettaglio</p>
+
+      <div class="button-grid">
+        <a class="cardlink" href="/liltalks/index.html">
+          <div class="nav-card nav-liltalks">
+            <div class="bubble"></div>
+            <div class="immagine_liltalks" style="width:140px;height:140px;display:grid;place-items:center;margin:0 auto">
+              <img src="/IMG-20241022-WA0013-removebg-preview.png" alt="LilTalks" style="max-width:100%;max-height:100%;object-fit:contain">
             </div>
-            <div class="liloscambio-container">
-                <a href="https://liloscambio.ch/default.php" style="text-decoration: none; color: inherit;">
-                    <div class="big-button">
-                        <div class="big-button-logo">
-                            <img src="lilo_scambio.png" alt="LiLoScambio" style="background-color: black;">
-                        </div>
-                        <div class="big-button-content">
-                            <div class="big-button-title">LiLoScambio</div>
-                            <div class="big-button-description">è una piattaforma dove gli allievi possono scambiarsi i riassunti, appunti e materiale scolastico. Si tratta di un prezioso aiuto allo studio! <br> Al momento disponibile solo per le classi di Terza e di Seconda!</div>
-                        </div>
-                    </div>
-                </a>
+            <h3>LiLtalks</h3>
+          </div>
+        </a>
+
+        <a class="cardlink" href="/feste/index.html">
+          <div class="nav-card nav-feste">
+            <div class="bubble"></div>
+            <div class="button-logo"></div>
+            <h3 style="color:#BB86FC;text-align:left;text-transform:uppercase;font-size:32px;line-height:.98;text-shadow:2px 2px 4px rgba(0,0,0,.7);font-weight:800;position:relative;z-index:2">
+              VENDITA<br>BIGLIETTI<br>FESTE
+            </h3>
+          </div>
+        </a>
+
+        <a class="cardlink" href="/cinelilo/index.html">
+          <div class="nav-card nav-cinelilo">
+            <div class="bubble"></div>
+            <div class="immagine_liltalks" style="width:140px;height:140px;display:grid;place-items:center;margin:0 auto">
+              <img src="Progetti-1-1-removebg-preview.png" alt="CineLiLo" style="max-width:100%;max-height:100%;object-fit:contain">
             </div>
-            <div class="contact-box">
-                <h2>Contattaci</h2>
-                <p>Instagram: <a href="https://www.instagram.com/lil.octopuss">@lil.octopuss</a></p>
-                <p>WhatsApp: Entra nella nostra Community dal link su Instagram!</p>
-                <p>Email: comitatolilo@gmail.com</p>
+            <h3>CineLiLo</h3>
+          </div>
+        </a>
+
+        <a class="cardlink" href="/autogestite/autogestite.html">
+          <div class="nav-card nav-autog">
+            <div class="bubble"></div>
+            <div class="immagine_liltalks" style="width:140px;height:140px;display:grid;place-items:center;margin:0 auto">
+              <img src="dante-modified.png" alt="Autogestite" style="max-width:100%;max-height:100%;object-fit:contain">
             </div>
-        </div>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            setTimeout(() => {
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 1000);
-            const hasVisited = localStorage.getItem('hasVisited');
-            if (!hasVisited) {
-                document.querySelectorAll('.loading-logo, .main-title, .button-grid, .contact-box').forEach(element => {
-                    element.classList.add('animate-in');
-                });
-                localStorage.setItem('hasVisited', 'true');
-            } else {
-                document.querySelectorAll('.loading-logo, .main-title, .button-grid, .contact-box').forEach(element => {
-                    element.classList.add('no-animation');
-                });
-            }
-        });
-    </script>
+            <h3>Autogestite</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="liloscambio-container">
+        <a href="https://liloscambio.ch/default.php" style="text-decoration:none;color:inherit">
+          <div class="big-button">
+            <div class="big-button-logo"><img src="lilo_scambio.png" alt="LiLoScambio" /></div>
+            <div>
+              <div class="big-button-title">LiLoScambio</div>
+              <div class="big-button-description">Piattaforma dove gli allievi possono scambiarsi riassunti, appunti e materiale scolastico. Al momento disponibile per Seconda e Terza.</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Loader + animazioni coerenti
+    document.addEventListener('DOMContentLoaded', () => {
+      const loadingScreen = document.getElementById('loading-screen');
+      setTimeout(()=>{ loadingScreen.style.opacity='0'; setTimeout(()=>loadingScreen.style.display='none', 450); }, 700);
+
+      const hasVisited = localStorage.getItem('hasVisited');
+      const selectors = ['.main-title', '.button-grid'];
+      if(!hasVisited){
+        selectors.forEach(s => document.querySelector(s)?.classList.remove('no-animation'));
+        localStorage.setItem('hasVisited','true');
+      }else{
+        selectors.forEach(s => document.querySelector(s)?.classList.add('no-animation'));
+      }
+
+      // Sidebar
+      const sidebar = document.getElementById('sidebar');
+      document.getElementById('openMenu').addEventListener('click', ()=>{ sidebar.classList.add('open'); sidebar.setAttribute('aria-hidden','false'); });
+      document.getElementById('closeMenu').addEventListener('click', ()=>{ sidebar.classList.remove('open'); sidebar.setAttribute('aria-hidden','true'); });
+      document.addEventListener('keydown', e=>{ if(e.key==='Escape') sidebar.classList.remove('open'); });
+
+      // Tema (dark/light)
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if(stored){ root.setAttribute('data-theme', stored); }
+      document.getElementById('themeToggle').addEventListener('click', ()=>{
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    });
+  </script>
 </body>
 </html>
