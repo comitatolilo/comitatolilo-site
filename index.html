@@ -10,17 +10,24 @@
       --primary-color:#ffffff; --accent-color:#333333;
       --background-color:#000000; --surface-color:#111111;
       --text-color:#ffffff; --text-color-secondary:#bbbbbb;
-      --box-shadow:0 4px 6px rgba(0,0,0,.2);
-      --liloscambio-color:#ba454f; --shadow:rgba(0,0,0,.45);
+      --box-shadow:0 8px 30px rgba(0,0,0,.25);
+      --shadow:rgba(0,0,0,.45);
       --link:#7bd4ff;
+      --card-radius:12px;
+      /* palette card */
+      --tickets-border:#00d0ff;     /* ciano acceso per contrasto */
+      --liltalks-border:#4a90e2;
+      --cinelilo-border:#d81313;
+      --autog-border:#8B4513;
+      --accent-purple:#BB86FC;      /* usata solo come accento, non come overlay */
     }
     /* tema chiaro */
     [data-theme="light"]{
       --primary-color:#101010; --accent-color:#e9e9e9;
       --background-color:#fafafa; --surface-color:#ffffff;
       --text-color:#121212; --text-color-secondary:#555;
-      --box-shadow:0 4px 20px rgba(0,0,0,.07);
-      --liloscambio-color:#ba454f; --shadow:rgba(0,0,0,.12);
+      --box-shadow:0 8px 30px rgba(0,0,0,.10);
+      --shadow:rgba(0,0,0,.12);
       --link:#0066cc;
     }
 
@@ -62,48 +69,45 @@
     .main-content{padding-top:80px}
     .main-title{
       text-align:center; font-size:clamp(2rem,5vw,4rem); font-weight:600; margin:2.4rem 0; color:var(--primary-color);
-      opacity:0; animation:slideInFromTop 1s ease-in-out 1.8s forwards;
+      opacity:0; animation:slideInFromTop 1s ease-in-out 1.2s forwards;
     }
     .content-container{
-      max-width:860px; margin:0 auto; background:var(--surface-color); border-radius:12px; overflow:hidden; box-shadow:var(--box-shadow);
-      opacity:0; animation:fadeIn 1s ease-in-out 2.2s forwards;
+      max-width:980px; margin:0 auto; background:var(--surface-color); border-radius:var(--card-radius); overflow:hidden; box-shadow:var(--box-shadow);
+      opacity:0; animation:fadeIn 1s ease-in-out 1.6s forwards;
     }
 
     .button-grid{
       display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:2.2rem; background:var(--surface-color);
     }
-    .button-logo{margin:0; display:flex; justify-content:center; align-items:center}
 
-    /* Pulsante LiLoScambio (invariato di stile) */
-    .liloscambio-container{
-      margin:0 2.2rem 2.4rem 2.2rem; border:2px solid var(--liloscambio-color); border-radius:12px; overflow:hidden; background:#000; position:relative;
-    }
-    .big-button{display:flex; align-items:center; gap:18px; padding:1.6rem; cursor:pointer; color:#fff; position:relative; z-index:1; overflow:hidden; transition:.3s}
-    .big-button:before{content:''; position:absolute; inset:0; left:-100%; background:var(--liloscambio-color); transition:.5s; z-index:-1}
-    .big-button:hover:before{left:0}
-    .big-button-logo{width:80px; height:80px; display:grid; place-items:center}
-    .big-button-logo img{max-width:100%; max-height:100%; object-fit:contain; border-radius:50%}
-    .big-button-title{font-size:1.6rem; font-weight:600; background:linear-gradient(90deg,#fff,var(--liloscambio-color)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
-    .big-button-description{font-size:.95rem; color:#ddd; max-width:520px}
-
-    /* Card pulsanti progetto (stile tuo, coerente) */
+    /* Card generica */
     .nav-card{
-      position:relative; background:#000; border:2px solid transparent; border-radius:12px; padding:1.4rem; text-align:center;
-      transition:.3s; overflow:hidden; color:#fff; height:240px; display:flex; flex-direction:column; justify-content:center; align-items:center;
+      position:relative; background:#000; border:2px solid transparent; border-radius:var(--card-radius); padding:1.4rem; text-align:center;
+      transition:.25s; overflow:hidden; color:#fff; height:240px; display:flex; flex-direction:column; justify-content:center; align-items:center;
     }
     .nav-card:hover{transform:translateY(-2px)}
-    .nav-card h3{margin:.6rem 0 0; font-weight:600}
-    .nav-liltalks{border-color:#4a90e2} .nav-cinelilo{border-color:#d81313} .nav-feste{border-color:#BB86FC} .nav-autog{border-color:#8B4513}
-    .nav-card .bubble:before,.nav-card .bubble:after{content:''; position:absolute; top:50%; width:20px; height:20px; border-radius:50%; z-index:-1}
-    .nav-card .bubble:before{left:-20px; transform:translate(-50%,-50%)} .nav-card .bubble:after{right:-20px; transform:translate(50%,-50%)}
-    .nav-liltalks .bubble:before,.nav-liltalks .bubble:after{background:#4a90e2}
-    .nav-cinelilo .bubble:before,.nav-cinelilo .bubble:after{background:#d81313}
-    .nav-feste   .bubble:before,.nav-feste   .bubble:after{background:#BB86FC}
-    .nav-autog   .bubble:before,.nav-autog   .bubble:after{background:#8B4513}
+    .nav-card h3{margin:.6rem 0 0; font-weight:700}
+
+    /* Varianti bordo */
+    .nav-tickets{border-color:var(--tickets-border)}
+    .nav-liltalks{border-color:var(--liltalks-border)}
+    .nav-cinelilo{border-color:var(--cinelilo-border)}
+    .nav-autog{border-color:var(--autog-border)}
+
+    /* Bubbles animate – colori rivisti per contrasto, non viola sul viola */
+    .nav-card .bubble:before,.nav-card .bubble:after{content:''; position:absolute; top:50%; width:20px; height:20px; border-radius:50%; z-index:-1; opacity:.85}
+    .nav-card .bubble:before{left:-20px; transform:translate(-50%,-50%)} 
+    .nav-card .bubble:after{right:-20px; transform:translate(50%,-50%)}
+
+    .nav-tickets .bubble:before,.nav-tickets .bubble:after{background:#00d0ff}   /* ciano */
+    .nav-liltalks .bubble:before,.nav-liltalks .bubble:after{background:#4a90e2} /* blu */
+    .nav-cinelilo .bubble:before,.nav-cinelilo .bubble:after{background:#ff5858} /* rosso vivo */
+    .nav-autog   .bubble:before,.nav-autog   .bubble:after{background:#dca15c}   /* ambra */
+
     .nav-card:hover .bubble:before{animation:criss-left .8s both}
     .nav-card:hover .bubble:after{animation:criss-right .8s both}
 
-    /* Logo/loader coerenti col tuo file */
+    /* Logo/loader */
     #loading-screen{
       position:fixed; inset:0; background:var(--background-color); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:1; transition:opacity .6s ease;
     }
@@ -111,7 +115,7 @@
       background-image:url(foto_profilo_lilo_LE_upscale_balanced_x4.jpeg);
       width:220px; height:220px; border-radius:50%; background-size:cover; background-position:center; animation:pulse .8s infinite alternate;
     }
-    .logo{margin:auto; box-shadow:0 0 200px var(--shadow); opacity:0; animation:fadeIn 1.2s forwards 2.2s, slideDown 1.6s forwards 1.2s}
+    .logo{margin:auto; box-shadow:0 0 200px var(--shadow); opacity:0; animation:fadeIn 1.2s forwards 1.6s, slideDown 1.2s forwards 1.2s}
 
     a.cardlink{color:inherit; text-decoration:none}
 
@@ -121,11 +125,15 @@
     @keyframes fadeIn{from{opacity:0} to{opacity:1}}
     @keyframes slideInFromTop{from{transform:translateY(-50px); opacity:0} to{transform:translateY(0); opacity:1}}
     @keyframes slideDown{from{transform:translateY(-10px)} to{transform:translateY(0)}}
-    @keyframes criss-left{0%{left:-20px;width:20px;height:20px} 50%{left:50%} 100%{left:50%;width:480px;height:480px;opacity:1}}
-    @keyframes criss-right{0%{right:-20px;width:20px;height:20px} 50%{right:50%} 100%{right:50%;width:480px;height:480px;opacity:1}}
+    @keyframes criss-left{0%{left:-20px;width:20px;height:20px} 50%{left:50%} 100%{left:50%;width:520px;height:520px;opacity:.7}}
+    @keyframes criss-right{0%{right:-20px;width:20px;height:20px} 50%{right:50%} 100%{right:50%;width:520px;height:520px;opacity:.7}}
 
     /* Responsive */
-    @media (max-width:900px){ .button-grid{grid-template-columns:1fr; padding:1.2rem} .nav-card{height:170px} .big-button{flex-direction:column; text-align:center} .big-button-logo{width:64px;height:64px} .big-button-title{font-size:1.3rem} }
+    @media (max-width:900px){
+      .button-grid{grid-template-columns:1fr; padding:1.2rem}
+      .nav-card{height:180px}
+      .logo{width:180px;height:180px}
+    }
   </style>
 </head>
 <body>
@@ -139,10 +147,10 @@
       <button class="iconbtn" id="closeMenu" aria-label="Chiudi menu">✕</button>
     </div>
     <nav class="side-links">
-      <a href="/">Home</a>
+      <!-- PRIMO: Biglietti -->
+      <a href="/tickets">Biglietti / Feste</a>
       <a href="/liltalks/index.html">LiLtalks</a>
       <a href="/cinelilo/index.html">CineLiLo</a>
-      <a href="/feste/index.html">Biglietti / Feste</a>
       <a href="/autogestite/autogestite.html">Autogestite</a>
       <a href="/contatti.html">Contatti</a>
     </nav>
@@ -162,88 +170,86 @@
     <div class="logo"></div>
     <h1 class="main-title">Comitato LiLo</h1>
 
-<div class="content-container">
-  <h1 style="text-align:center; margin:1.4rem 0 .2rem">I nostri progetti</h1>
-  <p style="text-align:center; margin:0 0 1.4rem">Clicca per vederli nel dettaglio</p>
+    <div class="content-container">
+      <h1 style="text-align:center; margin:1.4rem 0 .2rem">I nostri progetti</h1>
+      <p style="text-align:center; margin:0 0 1.4rem">Clicca per vederli nel dettaglio</p>
 
-  <div class="button-grid">
+      <div class="button-grid">
 
-    <a class="cardlink" href="/liltalks/index.html">
-      <div class="nav-card nav-liltalks">
-        <div class="bubble"></div>
-        <div class="immagine_liltalks" style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
-          <img src="/IMG-20241022-WA0013-removebg-preview.png" alt="LilTalks" style="max-width:100%;max-height:100%;object-fit:contain">
-        </div>
-        <h3>LiLtalks</h3>
-      </div>
-    </a>
-
-    <a class="cardlink" href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
-      <div class="nav-card nav-feste">
-        <div class="bubble"></div>
-        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;height:100%">
-          <h3 style="color:#BB86FC;font-size:1.6rem;text-transform:uppercase;font-weight:800;letter-spacing:1px;line-height:1.2;margin:0">
-            Vendita<br>Biglietti<br>Feste
-          </h3>
-        </div>
-      </div>
-    </a>
-
-    <a class="cardlink" href="/cinelilo/index.html">
-      <div class="nav-card nav-cinelilo">
-        <div class="bubble"></div>
-        <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
-          <img src="Progetti-1-1-removebg-preview.png" alt="CineLiLo" style="max-width:100%;max-height:100%;object-fit:contain">
-        </div>
-        <h3>CineLiLo</h3>
-      </div>
-    </a>
-
-    <a class="cardlink" href="/autogestite/autogestite.html">
-      <div class="nav-card nav-autog">
-        <div class="bubble"></div>
-        <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
-          <img src="dante-modified.png" alt="Autogestite" style="max-width:100%;max-height:100%;object-fit:contain">
-        </div>
-        <h3>Autogestite</h3>
-      </div>
-    </a>
-
-    <!-- LILOSCMBIO CARD, stessa larghezza -->
-    <a class="cardlink" href="https://liloscambio.ch/default.php" target="_blank" rel="noopener">
-      <div class="nav-card" style="border-color:var(--liloscambio-color);background:#000;">
-        <div class="bubble"></div>
-        <div style="display:flex;align-items:center;gap:1rem;justify-content:center;flex-direction:column;text-align:center;height:100%">
-          <div style="width:80px;height:80px;display:grid;place-items:center">
-            <img src="lilo_scambio.png" alt="LiLoScambio" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:50%">
+        <!-- 1) VENDITA BIGLIETTI FESTE – PRIMO RIQUADRO, CONTRASTO ALTO -->
+        <a class="cardlink" href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
+          <div class="nav-card nav-tickets">
+            <div class="bubble"></div>
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;height:100%;gap:.4rem">
+              <div style="font-size:1rem;opacity:.9;letter-spacing:.12em">VENDITA</div>
+              <h3 style="font-size:1.9rem;line-height:1.18;margin:0;color:#fff;letter-spacing:.5px">
+                Biglietti <span style="color:var(--tickets-border)">Feste</span>
+              </h3>
+              <div style="font-size:.9rem;opacity:.8">tickets.comitatolilo.ch</div>
+            </div>
           </div>
-          <h3 style="font-size:1.5rem;font-weight:600;background:linear-gradient(90deg,#fff,var(--liloscambio-color));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:0">
-            LiLoScambio
-          </h3>
-          <p style="font-size:.9rem;color:#ddd;max-width:90%;margin:0 auto">
-            Piattaforma dove gli allievi possono scambiarsi riassunti, appunti e materiale scolastico.
-          </p>
-        </div>
-      </div>
-    </a>
+        </a>
 
-  </div>
-</div>
+        <!-- 2) LILTALKS -->
+        <a class="cardlink" href="/liltalks/index.html">
+          <div class="nav-card nav-liltalks">
+            <div class="bubble"></div>
+            <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
+              <img src="/IMG-20241022-WA0013-removebg-preview.png" alt="LiLtalks" style="max-width:100%;max-height:100%;object-fit:contain">
+            </div>
+            <h3>LiLtalks</h3>
+          </div>
+        </a>
+
+        <!-- 3) CINELILO -->
+        <a class="cardlink" href="/cinelilo/index.html">
+          <div class="nav-card nav-cinelilo">
+            <div class="bubble"></div>
+            <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
+              <img src="Progetti-1-1-removebg-preview.png" alt="CineLiLo" style="max-width:100%;max-height:100%;object-fit:contain">
+            </div>
+            <h3>CineLiLo</h3>
+          </div>
+        </a>
+
+        <!-- 4) AUTOGESTITE -->
+        <a class="cardlink" href="/autogestite/autogestite.html">
+          <div class="nav-card nav-autog">
+            <div class="bubble"></div>
+            <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
+              <img src="dante-modified.png" alt="Autogestite" style="max-width:100%;max-height:100%;object-fit:contain">
+            </div>
+            <h3>Autogestite</h3>
+          </div>
+        </a>
+
+        <!-- 5) LILOSCMBIO – STESSA LARGHEZZA, LEGGERMENTE PIÙ ALTO OK -->
+        <a class="cardlink" href="https://liloscambio.ch/default.php" target="_blank" rel="noopener">
+          <div class="nav-card" style="border-color:#ba454f;background:#000;">
+            <div class="bubble"></div>
+            <div style="display:flex;align-items:center;gap:1rem;justify-content:center;flex-direction:column;text-align:center;height:100%">
+              <div style="width:80px;height:80px;display:grid;place-items:center">
+                <img src="lilo_scambio.png" alt="LiLoScambio" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:50%">
+              </div>
+              <h3 style="font-size:1.5rem;font-weight:700;background:linear-gradient(90deg,#fff,#ba454f);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:0">
+                LiLoScambio
+              </h3>
+              <p style="font-size:.9rem;opacity:.85;max-width:90%;margin:.2rem auto 0">
+                Piattaforma dove gli allievi possono scambiarsi riassunti, appunti e materiale scolastico.
+              </p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </main>
 
   <script>
-    // Loader + animazioni coerenti
     document.addEventListener('DOMContentLoaded', () => {
+      // Loader dolce
       const loadingScreen = document.getElementById('loading-screen');
-      setTimeout(()=>{ loadingScreen.style.opacity='0'; setTimeout(()=>loadingScreen.style.display='none', 450); }, 700);
-
-      const hasVisited = localStorage.getItem('hasVisited');
-      const selectors = ['.main-title', '.button-grid'];
-      if(!hasVisited){
-        selectors.forEach(s => document.querySelector(s)?.classList.remove('no-animation'));
-        localStorage.setItem('hasVisited','true');
-      }else{
-        selectors.forEach(s => document.querySelector(s)?.classList.add('no-animation'));
-      }
+      setTimeout(()=>{ loadingScreen.style.opacity='0'; setTimeout(()=>loadingScreen.style.display='none', 450); }, 650);
 
       // Sidebar
       const sidebar = document.getElementById('sidebar');
@@ -251,7 +257,7 @@
       document.getElementById('closeMenu').addEventListener('click', ()=>{ sidebar.classList.remove('open'); sidebar.setAttribute('aria-hidden','true'); });
       document.addEventListener('keydown', e=>{ if(e.key==='Escape') sidebar.classList.remove('open'); });
 
-      // Tema (dark/light)
+      // Tema (dark/light) con persistenza
       const root = document.documentElement;
       const stored = localStorage.getItem('theme');
       if(stored){ root.setAttribute('data-theme', stored); }
