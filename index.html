@@ -6,43 +6,63 @@
   <title>Comitato Liceo Locarno</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* ---------- THEME VARIABLES ---------- */
     :root{
       --primary-color:#ffffff; --accent-color:#333333;
-      --background-color:#000000; --surface-color:#111111;
+      --background-color:#0b0b0f; --surface-color:#111318;
       --text-color:#ffffff; --text-color-secondary:#bbbbbb;
       --box-shadow:0 8px 30px rgba(0,0,0,.25);
       --shadow:rgba(0,0,0,.45);
       --link:#7bd4ff;
       --card-radius:12px;
 
+      /* Page gradient (DARK) */
+      --page-gradient: radial-gradient(1200px 800px at 10% 10%, #101421 0%, #0b1220 40%, #080b12 100%);
+
       /* Card (dark) */
       --card-bg:#000; --card-fg:#fff;
 
       /* Palette / bordi */
-      --tickets-border:#00d0ff;     /* ciano base */
-      --tickets-accent:#ffd24d;     /* ambra per “Feste” */
-      --liltalks-border:#4a90e2;    /* blu */
-      --cinelilo-border:#d81313;    /* rosso vivo */
-      --autog-border:#8B4513;       /* ambra/bruno */
-      --liloscambio-base:#ba454f;   /* rosso progetto */
-      --liloscambio-hover:#8b0014;  /* rosso scuro per hover */
+      --tickets-accent:#ffd24d;
+      --liltalks-border:#4a90e2;
+      --cinelilo-border:#d81313;
+      --autog-border:#8B4513;
+      --liloscambio-base:#ba454f;
+      --liloscambio-hover:#8b0014;
+
+      /* Ticket card gradients */
+      --tickets-bg: linear-gradient(135deg,#031a22 0%, #063c4a 50%, #0b6a7b 100%);
+      --tickets-bg-light: linear-gradient(135deg,#e7f7fb 0%, #d8f0f7 50%, #cbe8f2 100%);
     }
     [data-theme="light"]{
       --primary-color:#101010; --accent-color:#e9e9e9;
-      --background-color:#fafafa; --surface-color:#ffffff;
+      --background-color:#f4f7fb; --surface-color:#ffffff;
       --text-color:#121212; --text-color-secondary:#555;
       --box-shadow:0 8px 30px rgba(0,0,0,.10);
       --shadow:rgba(0,0,0,.12);
       --link:#0066cc;
 
+      /* Page gradient (LIGHT) */
+      --page-gradient: radial-gradient(1000px 700px at 85% 10%, #ffffff 0%, #f3f7fc 45%, #eaeff6 100%);
+
       /* Card (light) */
       --card-bg:#ffffff; --card-fg:#111111;
     }
 
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:'Poppins',sans-serif;line-height:1.6;background:var(--background-color);color:var(--text-color);overflow-x:hidden}
+    /* Enable animating custom property angle for the rainbow border */
+    @property --angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
 
-    /* HEADER */
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0;font-family:'Poppins',sans-serif;line-height:1.6;
+      background:var(--page-gradient); color:var(--text-color); overflow-x:hidden
+    }
+
+    /* ---------- HEADER & SIDEBAR ---------- */
     .header{
       position:fixed; inset:0 0 auto 0; height:64px;
       display:flex; align-items:center; justify-content:space-between;
@@ -55,7 +75,6 @@
     [data-theme="light"] .iconbtn:hover{background:rgba(0,0,0,.06)}
     .right{display:flex; align-items:center; gap:.25rem}
 
-    /* SIDEBAR */
     .sidebar{
       position:fixed; top:0; left:0; height:100dvh; width:min(290px,85vw);
       background:var(--surface-color); box-shadow:0 0 40px var(--shadow);
@@ -73,11 +92,9 @@
     .side-links a:hover{background:#ffffff10; border-color:#ffffff22}
     [data-theme="light"] .side-links a:hover{background:#00000008; border-color:#00000010}
 
-    /* MAIN STRUCTURE */
+    /* ---------- MAIN LAYOUT ---------- */
     .main-content{padding-top:80px}
-    .hero{
-      display:grid; place-items:center; margin:28px 0 6px;
-    }
+    .hero{ display:grid; place-items:center; margin:28px 0 6px; }
     .hero-logo{
       background-image:url(/img/logo-comitatolilo.png);
       width:220px; height:220px; border-radius:50%;
@@ -91,61 +108,76 @@
       display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:2.2rem; background:var(--surface-color);
     }
 
-    /* CARD BASE */
+    /* ---------- CARDS ---------- */
     .nav-card{
       position:relative; background:var(--card-bg); border:2px solid transparent; border-radius:var(--card-radius);
       padding:1.4rem; text-align:center; transition:transform .2s ease, background .2s ease, color .2s ease;
       overflow:hidden; color:var(--card-fg); height:240px; display:flex; flex-direction:column; justify-content:center; align-items:center;
-      isolation:isolate; /* per i layer del bordo animato */
+      isolation:isolate;
     }
     .nav-card h3{margin:.6rem 0 0; font-weight:700; color:var(--card-fg)}
     .nav-card:hover{transform:translateY(-2px)}
 
-    /* VARIANTI BORDO STATICO */
+    /* Bordi statici */
     .nav-liltalks{border-color:var(--liltalks-border)}
     .nav-cinelilo{border-color:var(--cinelilo-border)}
     .nav-autog{border-color:var(--autog-border)}
     .nav-liloscambio{border-color:var(--liloscambio-base)}
 
-    /* HOVER “RIEMPIMENTO” come LiLoScambio (tutte le card) */
+    /* Hover “riempimento” uniforme stile LiLoScambio */
     .nav-liltalks:hover{ background:#0a2b4f; color:#fff; }
     .nav-cinelilo:hover{ background:#4a0a0a; color:#fff; }
     .nav-autog:hover{ background:#2f1a0e; color:#fff; }
     .nav-liloscambio:hover{ background:var(--liloscambio-hover); color:#fff; }
     .nav-card:hover h3, .nav-card:hover p{ color:#fff; }
 
-    /* BIGLIETTI: BORDO ARCOBALENO ROTANTE + hover dedicato */
-    .nav-tickets{ border-color:transparent; }
+    /* ---------- TICKETS: bordo spesso arcobaleno animato + sfondo gradiente ---------- */
+
+    /* Spessore bordo */
+    .nav-tickets{
+      background: var(--tickets-bg);
+      border-color: transparent; /* il bordo lo disegniamo con ::before */
+    }
+    [data-theme="light"] .nav-tickets{ background: var(--tickets-bg-light); }
+
+    /* anello arcobaleno spesso, con colori che scorrono */
     .nav-tickets::before{
-      content:""; position:absolute; inset:-4px; border-radius:calc(var(--card-radius) + 4px);
-      background:conic-gradient(
-        from 0deg,
-        #ff004c, #ff7a00, #ffd400, #21d300, #00d0ff, #7a00ff, #ff00a8, #ff004c
+      content:""; position:absolute; inset:-8px; border-radius:calc(var(--card-radius) + 8px);
+      background: conic-gradient(from var(--angle),
+        #ff004c 0deg, #ff7a00 60deg, #ffd400 120deg, #21d300 180deg, #00d0ff 240deg, #7a00ff 300deg, #ff00a8 360deg
       );
-      animation:spin 4s linear infinite;
-      z-index:-1;
+      padding:8px; /* <— spessore del bordo */
       -webkit-mask: 
         linear-gradient(#000 0 0) content-box, 
         linear-gradient(#000 0 0);
       -webkit-mask-composite:xor; mask-composite:exclude;
-      padding:4px; /* spessore del bordo */
+      z-index:-1;
+      animation: rainbowShift 6s linear infinite;
     }
-    .nav-tickets:hover{ background:#003643; color:#fff; }
-    @keyframes spin{ to { transform:rotate(360deg); } }
 
-    /* Bubbles leggere (opzionali, manteniamo) */
-    .nav-card .bubble:before,.nav-card .bubble:after{content:''; position:absolute; top:50%; width:20px; height:20px; border-radius:50%; z-index:-2; opacity:.85}
+    @keyframes rainbowShift {
+      to { --angle: 360deg; }
+    }
+
+    /* Hover riempimento coerente */
+    .nav-tickets:hover{
+      background: linear-gradient(135deg, #07232b 0%, #0b3e4a 50%, #0e6a7a 100%);
+      color:#fff;
+    }
+
+    /* bolle soft (decorative) */
+    .nav-card .bubble:before,.nav-card .bubble:after{content:''; position:absolute; top:50%; width:20px; height:20px; border-radius:50%; z-index:-2; opacity:.7}
     .nav-card .bubble:before{left:-20px; transform:translate(-50%,-50%)} 
     .nav-card .bubble:after{right:-20px; transform:translate(50%,-50%)}
     .nav-liltalks .bubble:before,.nav-liltalks .bubble:after{background:#4a90e2}
     .nav-cinelilo .bubble:before,.nav-cinelilo .bubble:after{background:#ff5858}
     .nav-autog   .bubble:before,.nav-autog   .bubble:after{background:#dca15c}
     .nav-liloscambio .bubble:before,.nav-liloscambio .bubble:after{background:var(--liloscambio-base)}
-    .nav-tickets .bubble:before,.nav-tickets .bubble:after{background:var(--tickets-border)}
+    .nav-tickets .bubble:before,.nav-tickets .bubble:after{background:#00d0ff}
 
     a.cardlink{color:inherit; text-decoration:none}
 
-    /* FOOTER */
+    /* ---------- FOOTER ---------- */
     footer{
       margin:24px auto; max-width:980px; padding:16px 20px; color:var(--text-color-secondary);
       display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between;
@@ -154,7 +186,7 @@
     .footer-links a{color:var(--text-color-secondary); text-decoration:none}
     .footer-links a:hover{text-decoration:underline}
 
-    /* RESPONSIVE */
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width:900px){
       .button-grid{grid-template-columns:1fr; padding:1.2rem}
       .nav-card{height:180px}
@@ -164,8 +196,6 @@
   </style>
 </head>
 <body>
-  <!-- NESSUN LOADER: via overlay di caricamento -->
-
   <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
@@ -193,7 +223,6 @@
 
   <!-- MAIN -->
   <main class="main-content">
-    <!-- LOGO CENTRALE SEMPRE VISIBILE -->
     <div class="hero"><div class="hero-logo" aria-hidden="true"></div></div>
     <h1 class="main-title">Comitato LiLo</h1>
 
@@ -203,7 +232,7 @@
 
       <div class="button-grid">
 
-        <!-- 1) VENDITA BIGLIETTI FESTE – PRIMO RIQUADRO (BORDO ARCOBALENO) -->
+        <!-- 1) VENDITA BIGLIETTI FESTE – bordo spesso arcobaleno animato -->
         <a class="cardlink" href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
           <div class="nav-card nav-tickets">
             <div class="bubble"></div>
