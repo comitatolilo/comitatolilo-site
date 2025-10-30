@@ -169,6 +169,26 @@
 
     a.cardlink{color:inherit; text-decoration:none}
 
+    /* Testo arcobaleno animato per la parola "Feste" */
+.rainbow-text{
+  background: conic-gradient(from var(--angle),
+    #ff004c, #ff7a00, #ffd400, #21d300, #00d0ff, #7a00ff, #ff00a8, #ff004c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowShift 5s linear infinite; /* usa già la @keyframes esistente */
+  font-weight: 800;
+  text-shadow: 0 0 0.8px rgba(0,0,0,.25); /* leggero contorno per leggibilità */
+}
+
+/* Evita che l’hover della card sovrascriva il testo arcobaleno */
+.nav-tickets:hover .rainbow-text{
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
     /* ---------- FOOTER ---------- */
     footer{
       margin:24px auto; max-width:980px; padding:16px 20px; color:var(--text-color-secondary);
@@ -236,7 +256,7 @@
             <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;height:100%;gap:.4rem;">
               <div style="font-size:1rem;opacity:.9;letter-spacing:.12em">VENDITA</div>
               <h3 style="font-size:1.9rem;line-height:1.18;margin:0;letter-spacing:.5px">
-                Biglietti <span style="color:var(--tickets-accent)">Feste</span>
+                Biglietti <span class="rainbow-text">Feste</span>
               </h3>
             </div>
           </div>
