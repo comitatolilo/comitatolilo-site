@@ -64,6 +64,30 @@
       margin:0;padding:0;font-family:'Poppins',sans-serif;line-height:1.6;
       background:var(--page-gradient); color:var(--text-color); overflow-x:hidden
     }
+        /* Sfondo aurora animato */
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:-2; pointer-events:none;
+      background:
+        radial-gradient(42rem 34rem at var(--x1,20%) var(--y1,22%), rgba(124,58,237,.22) 0%, transparent 60%),
+        radial-gradient(36rem 28rem at var(--x2,78%) var(--y2,24%), rgba(236,72,153,.20) 0%, transparent 60%),
+        radial-gradient(48rem 40rem at var(--x3,50%) var(--y3,85%), rgba(99,102,241,.16) 0%, transparent 65%);
+      filter: blur(60px) saturate(120%);
+      animation: auroraMove 18s ease-in-out infinite alternate;
+    }
+    body::after{
+      content:"";
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background: linear-gradient(to top, rgba(0,0,0,.35), transparent 35%);
+    }
+    @keyframes auroraMove{
+      0%   { --x1:18%; --y1:22%; --x2:82%; --y2:28%; --x3:52%; --y3:88%; filter: blur(60px) saturate(120%); }
+      50%  { --x1:26%; --y1:30%; --x2:72%; --y2:18%; --x3:48%; --y3:78%; filter: blur(64px) saturate(125%); }
+      100% { --x1:22%; --y1:26%; --x2:68%; --y2:26%; --x3:56%; --y3:70%; filter: blur(58px) saturate(118%); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      body::before{ animation:none; }
+    }
 
     /* ---------- BACKGROUND AURORA ---------- */
     body::before{
@@ -99,7 +123,20 @@
       background: color-mix(in oklab, var(--surface-color) 92%, transparent);
       backdrop-filter: blur(6px);
     }
-
+    /* Superfici leggermente trasparenti + blur per far emergere l’aurora */
+    .content-container,
+    .header,
+    .sidebar,
+    .section{
+      background: rgba(17,19,24,.92);     /* tema scuro */
+      backdrop-filter: blur(6px);
+    }
+    [data-theme="light"] .content-container,
+    [data-theme="light"] .header,
+    [data-theme="light"] .sidebar,
+    [data-theme="light"] .section{
+      background: rgba(255,255,255,.92);  /* tema chiaro */
+    }
     /* ---------- HEADER & SIDEBAR ---------- */
     .header{
       position:fixed; inset:0 0 auto 0; height:64px;
