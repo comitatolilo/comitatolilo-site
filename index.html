@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" data-theme="dark">
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -291,13 +291,51 @@
   </footer>
 
   <script>
-    (function initTheme(){
-      const root=document.documentElement;
-      const stored=localStorage.getItem('theme');
-      if(stored==='light'||stored==='dark')root.setAttribute('data-theme',stored);
-      else root.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-      const mq=window.matchMedia('(prefers-color-scheme: dark)');
-      mq.addEventListener?.('change',e=>{if(!localStorage.getItem('theme'))document.documentElement.setAttribute('data-theme',e.matches?'dark':'light');});
+    // Tema: applica preferenza utente se esiste, altrimenti segue il sistema
+    (function () {
+      const root = document.documentElement;
+      const storageKey = 'theme';
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  
+      function applyTheme(t) { root.setAttribute('data-theme', t); }
+  
+      const stored = localStorage.getItem(storageKey);
+      const initial = stored === 'light' || stored === 'dark'
+        ? stored
+        : (mq.matches ? 'dark' : 'light');
+      applyTheme(initial);
+  
+      // Se l’utente non ha scelto manualmente, aggiorna quando cambia il tema di sistema
+      mq.addEventListener?.('change', e => {
+        if (!localStorage.getItem(storageKey)) applyTheme(e.matches ? 'dark' : 'light');
+      });
+  
+      // Toggle manuale
+      const themeBtn = document.getElementById('themeToggle');
+      themeBtn?.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        localStorage.setItem(storageKey, next);
+      });
     })();
-    const sidebar=document.getElementById('sidebar');
-    document.getElementById('openMenu').addEventListener('click',()=>{sidebar.classList.add
+  
+    // Sidebar: apri/chiudi + ESC
+    (function () {
+      const sidebar  = document.getElementById('sidebar');
+      const openBtn  = document.getElementById('openMenu');
+      const closeBtn = document.getElementById('closeMenu');
+  
+      function open()  { sidebar.classList.add('open');  sidebar.setAttribute('aria-hidden','false'); }
+      function close() { sidebar.classList.remove('open'); sidebar.setAttribute('aria-hidden','true'); }
+  
+      openBtn?.addEventListener('click', open);
+      closeBtn?.addEventListener('click', close);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  
+      // Chiudi la sidebar quando si clicca un link interno
+      sidebar?.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => { if (a.getAttribute('href')?.startsWith('#') || a.origin === location.origin) close(); });
+      });
+    })();
+  </script>
+
