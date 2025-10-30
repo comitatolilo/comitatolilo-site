@@ -16,14 +16,8 @@
       --link:#7bd4ff;
       --card-radius:12px;
 
-      /* Aurora (dark) */
-      --aurora-1: rgba(124,58,237,.22);  /* viola */
-      --aurora-2: rgba(236,72,153,.20);  /* fucsia */
-      --aurora-3: rgba(99,102,241,.16);  /* indaco */
-      --vignette: linear-gradient(to top, rgba(0,0,0,.35), transparent 35%);
-
-      /* Page gradient (DARK) */
-      --page-gradient: radial-gradient(1200px 800px at 10% 10%, #101421 0%, #0b1220 40%, #080b12 100%);
+      /* Page gradient (DARK) – semplice nero→viola */
+      --page-gradient: linear-gradient(180deg,#0b0b0f 0%,#15122a 55%,#25164a 100%);
 
       /* Card (dark) */
       --card-bg:#000; --card-fg:#fff;
@@ -44,14 +38,8 @@
       --shadow:rgba(0,0,0,.12);
       --link:#0066cc;
 
-      /* Aurora (light) – più soft */
-      --aurora-1: rgba(255,183,77,.20);  /* arancio chiaro */
-      --aurora-2: rgba(99,102,241,.16);  /* indaco soft */
-      --aurora-3: rgba(16,185,129,.14);  /* verde acqua */
-      --vignette: linear-gradient(to top, rgba(255,255,255,.35), transparent 35%);
-
-      /* Page gradient (LIGHT) */
-      --page-gradient: radial-gradient(1000px 700px at 85% 10%, #ffffff 0%, #f3f7fc 45%, #eaeff6 100%);
+      /* Page gradient (LIGHT) – bianco→azzurrino */
+      --page-gradient: linear-gradient(180deg,#ffffff 0%,#f4f7fb 55%,#e9f2ff 100%);
 
       /* Card (light) */
       --card-bg:#ffffff; --card-fg:#111111;
@@ -64,84 +52,12 @@
       margin:0;padding:0;font-family:'Poppins',sans-serif;line-height:1.6;
       background:var(--page-gradient); color:var(--text-color); overflow-x:hidden
     }
-        /* Sfondo aurora animato */
-    body::before{
-      content:"";
-      position:fixed; inset:0; z-index:-2; pointer-events:none;
-      background:
-        radial-gradient(42rem 34rem at var(--x1,20%) var(--y1,22%), rgba(124,58,237,.22) 0%, transparent 60%),
-        radial-gradient(36rem 28rem at var(--x2,78%) var(--y2,24%), rgba(236,72,153,.20) 0%, transparent 60%),
-        radial-gradient(48rem 40rem at var(--x3,50%) var(--y3,85%), rgba(99,102,241,.16) 0%, transparent 65%);
-      filter: blur(60px) saturate(120%);
-      animation: auroraMove 18s ease-in-out infinite alternate;
-    }
-    body::after{
-      content:"";
-      position:fixed; inset:0; z-index:-1; pointer-events:none;
-      background: linear-gradient(to top, rgba(0,0,0,.35), transparent 35%);
-    }
-    @keyframes auroraMove{
-      0%   { --x1:18%; --y1:22%; --x2:82%; --y2:28%; --x3:52%; --y3:88%; filter: blur(60px) saturate(120%); }
-      50%  { --x1:26%; --y1:30%; --x2:72%; --y2:18%; --x3:48%; --y3:78%; filter: blur(64px) saturate(125%); }
-      100% { --x1:22%; --y1:26%; --x2:68%; --y2:26%; --x3:56%; --y3:70%; filter: blur(58px) saturate(118%); }
-    }
-    @media (prefers-reduced-motion: reduce){
-      body::before{ animation:none; }
-    }
 
-    /* ---------- BACKGROUND AURORA ---------- */
-    body::before{
-      content:"";
-      position:fixed; inset:0; z-index:-2; pointer-events:none;
-      background:
-        radial-gradient(42rem 34rem at var(--x1,20%) var(--y1,22%), var(--aurora-1) 0%, transparent 60%),
-        radial-gradient(36rem 28rem at var(--x2,78%) var(--y2,24%), var(--aurora-2) 0%, transparent 60%),
-        radial-gradient(48rem 40rem at var(--x3,50%) var(--y3,85%), var(--aurora-3) 0%, transparent 65%);
-      filter: blur(60px) saturate(120%);
-      animation: auroraMove 18s ease-in-out infinite alternate;
-      will-change: transform, background-position, filter;
-    }
-    body::after{
-      content:"";
-      position:fixed; inset:0; z-index:-1; pointer-events:none;
-      background: var(--vignette);
-    }
-    @keyframes auroraMove{
-      0%   { --x1:18%; --y1:22%; --x2:82%; --y2:28%; --x3:52%; --y3:88%; filter: blur(60px) saturate(120%); }
-      50%  { --x1:26%; --y1:30%; --x2:72%; --y2:18%; --x3:48%; --y3:78%; filter: blur(64px) saturate(125%); }
-      100% { --x1:22%; --y1:26%; --x2:68%; --y2:26%; --x3:56%; --y3:70%; filter: blur(58px) saturate(118%); }
-    }
-    @media (prefers-reduced-motion: reduce){
-      body::before{ animation:none; }
-    }
-
-    /* ---------- ELEMENTI SEMI-TRASPARENTI ---------- */
-    .content-container,
-    .header,
-    .sidebar,
-    .section{
-      background: color-mix(in oklab, var(--surface-color) 92%, transparent);
-      backdrop-filter: blur(6px);
-    }
-    /* Superfici leggermente trasparenti + blur per far emergere l’aurora */
-    .content-container,
-    .header,
-    .sidebar,
-    .section{
-      background: rgba(17,19,24,.92);     /* tema scuro */
-      backdrop-filter: blur(6px);
-    }
-    [data-theme="light"] .content-container,
-    [data-theme="light"] .header,
-    [data-theme="light"] .sidebar,
-    [data-theme="light"] .section{
-      background: rgba(255,255,255,.92);  /* tema chiaro */
-    }
     /* ---------- HEADER & SIDEBAR ---------- */
     .header{
       position:fixed; inset:0 0 auto 0; height:64px;
       display:flex; align-items:center; justify-content:space-between;
-      box-shadow:var(--box-shadow);
+      background:var(--surface-color); box-shadow:var(--box-shadow);
       padding:0 .75rem; z-index:1000;
     }
     .brand a{ text-decoration:none; color:var(--text-color); font-weight:600; font-size:clamp(1rem,2.4vw,1.1rem); }
@@ -152,7 +68,7 @@
 
     .sidebar{
       position:fixed; top:0; left:0; height:100dvh; width:min(290px,85vw);
-      box-shadow:0 0 40px var(--shadow);
+      background:var(--surface-color); box-shadow:0 0 40px var(--shadow);
       transform:translateX(-100%); transition:transform .28s ease; z-index:1100;
       display:flex; flex-direction:column; padding:14px;
     }
@@ -177,10 +93,10 @@
       box-shadow:0 0 200px var(--shadow);
     }
     .main-title{ text-align:center; font-size:clamp(2rem,5vw,4rem); font-weight:700; margin:1.2rem 0 2rem; color:var(--primary-color); }
-    .content-container{ max-width:980px; margin:0 auto; border-radius:var(--card-radius); overflow:hidden; box-shadow:var(--box-shadow); }
+    .content-container{ max-width:980px; margin:0 auto; background:var(--surface-color); border-radius:var(--card-radius); overflow:hidden; box-shadow:var(--box-shadow); }
 
     .button-grid{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:2.2rem;
+      display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:2.2rem; background:var(--surface-color);
     }
 
     /* ---------- CARDS ---------- */
@@ -260,6 +176,7 @@
 
     /* ---------- SEZIONE CHI SIAMO ---------- */
     .section{
+      background:var(--surface-color);
       border-radius:var(--card-radius);
       box-shadow:var(--box-shadow);
       padding:20px;
