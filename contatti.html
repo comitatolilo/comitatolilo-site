@@ -11,7 +11,7 @@
   <script defer src="/assets/app.js"></script>
 </head>
 <body>
-  <!-- Sidebar (ordine unificato) -->
+  <!-- Sidebar -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -27,7 +27,7 @@
     </nav>
   </aside>
 
-  <!-- Header condiviso -->
+  <!-- Header -->
   <header class="header">
     <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
     <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
@@ -36,29 +36,36 @@
     </div>
   </header>
 
-  <!-- Contenuto -->
+  <!-- Contenuto principale -->
   <main class="main-content">
-    <section class="section">
-      <h1>Contatti</h1>
-      <p>Se necessitate di aiuto, <a href="/contatti">contattaci qui</a>.</p>
-      <p>
-        Instagram: 
-        <a href="https://www.instagram.com/lil.octopuss" target="_blank" rel="noopener">
-          Apri il profilo Instagram
-        </a>
-      </p>
-      <p>
-        Biglietti / Eventi:
-        <a href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
-          Vai a tickets.comitatolilo.ch
-        </a>
-      </p>
-    </section>
+    <div class="hero">
+      <div class="hero-logo" aria-hidden="true"></div>
+    </div>
+    <h1 class="main-title">Contatti</h1>
+
+    <div class="content-container">
+      <section class="section">
+        <h2>Come contattarci</h2>
+        <p>Per comunicazioni generali o richieste di supporto, <a href="/contatti">contattaci qui</a>.</p>
+        <p>Per la vendita dei biglietti e gli eventi visita <a href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">tickets.comitatolilo.ch</a>.</p>
+        <p>Seguici su Instagram per aggiornamenti, foto e novità:  
+          <a href="https://www.instagram.com/lil.octopuss" target="_blank" rel="noopener">@lil.octopuss</a>
+        </p>
+      </section>
+
+      <section class="section" id="chi-siamo">
+        <h2>Chi siamo</h2>
+        <p>Siamo il Comitato Studenti del Liceo di Locarno. Organizziamo eventi, attività culturali e sociali per la comunità scolastica e giovanile.</p>
+        <p>Per comunicazioni ufficiali o collaborazioni, utilizza sempre la pagina dedicata ai <a href="/contatti">contatti</a>.</p>
+        <p>LiLoScambio è un progetto esterno e indipendente, creato da studenti del Liceo. Non è sviluppato né gestito da noi; privacy, condizioni e responsabilità sono indicate esclusivamente sul loro sito.</p>
+      </section>
+    </div>
   </main>
 
-  <!-- Footer condiviso -->
+  <!-- Footer -->
   <footer>
     <div class="footer-links">
+      <a href="/contatti">Contatti</a>
       <a href="/privacy">Privacy</a>
       <a href="/imprint">Imprint</a>
     </div>
