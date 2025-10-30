@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contatti – Comitato Liceo Locarno</title>
 
-  <!-- Asset condivisi -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="/assets/app.css">
   <script defer src="/assets/app.js"></script>
 </head>
 <body>
-  <!-- Sidebar -->
+  <!-- Sidebar (uguale all'index) -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -27,7 +26,7 @@
     </nav>
   </aside>
 
-  <!-- Header -->
+  <!-- Header (uguale all'index) -->
   <header class="header">
     <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
     <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
@@ -36,33 +35,40 @@
     </div>
   </header>
 
-  <!-- Contenuto principale -->
   <main class="main-content">
-    <div class="hero">
-      <div class="hero-logo" aria-hidden="true"></div>
-    </div>
-    <h1 class="main-title">Contatti</h1>
-
     <div class="content-container">
-      <section class="section">
-        <h2>Come contattarci</h2>
-        <p>Per comunicazioni generali o richieste di supporto, <a href="/contatti">contattaci qui</a>.</p>
-        <p>Per la vendita dei biglietti e gli eventi visita <a href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">tickets.comitatolilo.ch</a>.</p>
-        <p>Seguici su Instagram per aggiornamenti, foto e novità:  
-          <a href="https://www.instagram.com/lil.octopuss" target="_blank" rel="noopener">@lil.octopuss</a>
-        </p>
-      </section>
+      <div class="button-grid">
+        <!-- Riquadro 1: Comunicazioni generali -->
+        <a class="cardlink" href="/contatti">
+          <div class="nav-card">
+            <h3>Comunicazioni generali</h3>
+            <p>Se necessitate di aiuto, <span style="white-space:nowrap"><a href="/contatti">contattaci qui</a></span>.</p>
+          </div>
+        </a>
 
-      <section class="section" id="chi-siamo">
-        <h2>Chi siamo</h2>
-        <p>Siamo il Comitato Studenti del Liceo di Locarno. Organizziamo eventi, attività culturali e sociali per la comunità scolastica e giovanile.</p>
-        <p>Per comunicazioni ufficiali o collaborazioni, utilizza sempre la pagina dedicata ai <a href="/contatti">contatti</a>.</p>
-        <p>LiLoScambio è un progetto esterno e indipendente, creato da studenti del Liceo. Non è sviluppato né gestito da noi; privacy, condizioni e responsabilità sono indicate esclusivamente sul loro sito.</p>
-      </section>
+        <!-- Riquadro 2: Biglietti/Eventi (stile nav-tickets con bordo animato) -->
+        <a class="cardlink" href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
+          <div class="nav-card nav-tickets">
+            <div>
+              <div style="font-size:1rem;opacity:.9;letter-spacing:.12em">VENDITA</div>
+              <h3 style="margin:.4rem 0 0">Biglietti <span class="rainbow-text">Feste</span></h3>
+              <p style="margin:.4rem 0 0">Vai a tickets.comitatolilo.ch</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Riquadro 3: Instagram -->
+        <a class="cardlink" href="https://www.instagram.com/lil.octopuss" target="_blank" rel="noopener">
+          <div class="nav-card">
+            <h3>Instagram</h3>
+            <p>Apri il profilo @lil.octopuss</p>
+          </div>
+        </a>
+      </div>
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer (uguale all'index) -->
   <footer>
     <div class="footer-links">
       <a href="/contatti">Contatti</a>
