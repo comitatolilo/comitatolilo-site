@@ -4,179 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Comitato Liceo Locarno</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root{
-      --primary-color:#ffffff; --accent-color:#333333;
-      --background-color:#0b0b0f; --surface-color:#111318;
-      --text-color:#ffffff; --text-color-secondary:#bbbbbb;
-      --box-shadow:0 8px 30px rgba(0,0,0,.25);
-      --shadow:rgba(0,0,0,.45);
-      --link:#7bd4ff;
-      --card-radius:12px;
-
-      /* Gradiente scuro: nero → viola */
-      --page-gradient: linear-gradient(180deg,#0b0b0f 0%,#15122a 55%,#25164a 100%);
-
-      --card-bg:#000; --card-fg:#fff;
-      --tickets-accent:#ffd24d;
-      --liltalks-border:#4a90e2;
-      --cinelilo-border:#d81313;
-      --autog-border:#8B4513;
-      --liloscambio-base:#ba454f;
-      --liloscambio-hover:#8b0014;
-    }
-    [data-theme="light"]{
-      --primary-color:#101010; --accent-color:#e9e9e9;
-      --background-color:#f4f7fb; --surface-color:#ffffff;
-      --text-color:#121212; --text-color-secondary:#555;
-      --box-shadow:0 8px 30px rgba(0,0,0,.10);
-      --shadow:rgba(0,0,0,.12);
-      --link:#0066cc;
-
-      /* Gradiente chiaro: bianco → azzurrino */
-      --page-gradient: linear-gradient(180deg,#ffffff 0%,#f4f7fb 55%,#e9f2ff 100%);
-
-      --card-bg:#ffffff; --card-fg:#111111;
-    }
-
-    @property --angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;padding:0;font-family:'Poppins',sans-serif;line-height:1.6;
-      background:var(--page-gradient); color:var(--text-color); overflow-x:hidden
-    }
-
-    .header{
-      position:fixed; inset:0 0 auto 0; height:64px;
-      display:flex; align-items:center; justify-content:space-between;
-      background:var(--surface-color); box-shadow:var(--box-shadow);
-      padding:0 .75rem; z-index:1000;
-    }
-    .brand a{ text-decoration:none; color:var(--text-color); font-weight:600; font-size:clamp(1rem,2.4vw,1.1rem); }
-    .iconbtn{all:unset; cursor:pointer; padding:.55rem .7rem; border-radius:.8rem}
-    .iconbtn:hover{background:rgba(255,255,255,.06)}
-    [data-theme="light"] .iconbtn:hover{background:rgba(0,0,0,.06)}
-    .right{display:flex; align-items:center; gap:.25rem}
-
-    .sidebar{
-      position:fixed; top:0; left:0; height:100dvh; width:min(290px,85vw);
-      background:var(--surface-color); box-shadow:0 0 40px var(--shadow);
-      transform:translateX(-100%); transition:transform .28s ease; z-index:1100;
-      display:flex; flex-direction:column; padding:14px;
-    }
-    .sidebar.open{transform:translateX(0)}
-    .side-header{display:flex; align-items:center; justify-content:space-between; padding:6px 4px}
-    .side-title a{color:var(--text-color); text-decoration:none; font-weight:600}
-    .side-links{display:flex; flex-direction:column; gap:.5rem; padding:10px 4px}
-    .side-links a{
-      text-decoration:none; color:var(--text-color); padding:.7rem .9rem; border-radius:.8rem;
-      border:1px solid #ffffff08;
-    }
-    .side-links a:hover{background:#ffffff10; border-color:#ffffff22}
-    [data-theme="light"] .side-links a:hover{background:#00000008; border-color:#00000010}
-
-    .main-content{padding-top:80px}
-    .hero{ display:grid; place-items:center; margin:28px 0 6px; }
-    .hero-logo{
-      background-image:url(/img/logo-comitatolilo.png);
-      width:220px; height:220px; border-radius:50%;
-      background-size:cover; background-position:center;
-      box-shadow:0 0 200px var(--shadow);
-    }
-    .main-title{ text-align:center; font-size:clamp(2rem,5vw,4rem); font-weight:700; margin:1.2rem 0 2rem; color:var(--primary-color); }
-    .content-container{ max-width:980px; margin:0 auto; background:var(--surface-color); border-radius:var(--card-radius); overflow:hidden; box-shadow:var(--box-shadow); }
-
-    .button-grid{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:2.2rem; background:var(--surface-color);
-    }
-
-    .nav-card{
-      position:relative; background:var(--card-bg); border:2px solid transparent; border-radius:var(--card-radius);
-      padding:1.4rem; text-align:center; transition:transform .2s ease, background .2s ease, color .2s ease;
-      overflow:hidden; color:var(--card-fg); height:240px; display:flex; flex-direction:column; justify-content:center; align-items:center;
-      isolation:isolate;
-    }
-    .nav-card h3{margin:.6rem 0 0; font-weight:700; color:var(--card-fg)}
-    .nav-card:hover{transform:translateY(-2px)}
-    .nav-card > * { position: relative; z-index: 1; }
-
-    .nav-liltalks{border-color:var(--liltalks-border)}
-    .nav-cinelilo{border-color:var(--cinelilo-border)}
-    .nav-autog{border-color:var(--autog-border)}
-    .nav-liloscambio{border-color:var(--liloscambio-base)}
-
-    .nav-liltalks:hover{ background:#0a2b4f; color:#fff; }
-    .nav-cinelilo:hover{ background:#4a0a0a; color:#fff; }
-    .nav-autog:hover{ background:#2f1a0e; color:#fff; }
-    .nav-liloscambio:hover{ background:var(--liloscambio-hover); color:#fff; }
-    .nav-card:hover h3, .nav-card:hover p{ color:#fff; }
-
-    .nav-tickets{
-      background: var(--card-bg);
-      border-color: transparent;
-      overflow: visible;
-    }
-    .nav-tickets::before{
-      content:""; position:absolute; inset:-7px; border-radius:calc(var(--card-radius) + 7px);
-      background: conic-gradient(from var(--angle),
-        #ff004c,#ff7a00,#ffd400,#21d300,#00d0ff,#7a00ff,#ff00a8,#ff004c);
-      padding:7px;
-      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude;
-      animation: rainbowShift 5s linear infinite;
-      z-index: 0;
-    }
-    @keyframes rainbowShift { to { --angle: 360deg; } }
-
-    .nav-tickets::after{
-      content:""; position:absolute; inset:6px; border-radius:calc(var(--card-radius) - 2px);
-      background: transparent; transition: background .25s ease; z-index: 0;
-    }
-    .nav-tickets:hover::after{
-      background: linear-gradient(135deg,#fffbe8 0%,#ffeaa6 18%,#ffd96a 38%,#ffcf3c 55%,#f7b80a 75%,#e0a000 100%);
-    }
-    .nav-tickets:hover{ color:#111; }
-    .nav-tickets:hover h3, .nav-tickets:hover p, .nav-tickets:hover div{ color:#111; }
-
-    .rainbow-text{
-      background: conic-gradient(from var(--angle),
-        #ff004c,#ff7a00,#ffd400,#21d300,#00d0ff,#7a00ff,#ff00a8,#ff004c);
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent; -webkit-text-fill-color: transparent;
-      animation: rainbowShift 5s linear infinite; font-weight:800;
-      text-shadow: 0 0 0.8px rgba(0,0,0,.25);
-    }
-
-    .cardlink{text-decoration:none;color:inherit;display:block}
-
-    .section{
-      background:var(--surface-color);
-      border-radius:var(--card-radius);
-      box-shadow:var(--box-shadow);
-      padding:20px;
-      margin:26px auto;
-      max-width:980px;
-    }
-
-    footer{
-      margin:24px auto; max-width:980px; padding:16px 20px; color:var(--text-color-secondary);
-      display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between;
-    }
-    .footer-links{display:flex; gap:14px; flex-wrap:wrap}
-    .footer-links a{color:var(--text-color-secondary); text-decoration:none}
-    .footer-links a:hover{text-decoration:underline}
-
-    @media (max-width:900px){
-      .button-grid{grid-template-columns:1fr; padding:1.2rem}
-      .nav-card{height:auto; min-height:180px}
-      .hero-logo{width:180px;height:180px}
-      footer{padding:16px}
-      .nav-liloscambio{ min-height:200px; padding-block:1.6rem; }
-      .nav-liloscambio img{ width:84px; height:84px; object-fit:contain; }
-    }
-  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/app.css">
+  <script defer src="/assets/app.js"></script>
 </head>
 <body>
   <!-- MENU LATERALE -->
@@ -196,6 +26,7 @@
     </nav>
   </aside>
 
+  <!-- HEADER -->
   <header class="header">
     <button class="iconbtn" id="openMenu" aria-label="Apri menu">☰</button>
     <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
@@ -204,8 +35,11 @@
     </div>
   </header>
 
+  <!-- CONTENUTO PRINCIPALE -->
   <main class="main-content">
-    <div class="hero"><div class="hero-logo" aria-hidden="true"></div></div>
+    <div class="hero">
+      <div class="hero-logo" aria-hidden="true"></div>
+    </div>
     <h1 class="main-title">Comitato LiLo</h1>
 
     <div class="content-container">
@@ -213,7 +47,6 @@
       <p style="text-align:center; margin:0 0 1.4rem">Clicca per vederli nel dettaglio</p>
 
       <div class="button-grid">
-
         <!-- 1) Biglietti/Feste -->
         <a class="cardlink" href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
           <div class="nav-card nav-tickets">
@@ -268,7 +101,6 @@
             </p>
           </div>
         </a>
-
       </div>
     </div>
 
@@ -281,6 +113,7 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-links">
       <a href="/contatti">Contatti</a>
@@ -289,53 +122,5 @@
     </div>
     <div>© <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a></div>
   </footer>
-
-  <script>
-    // Tema: applica preferenza utente se esiste, altrimenti segue il sistema
-    (function () {
-      const root = document.documentElement;
-      const storageKey = 'theme';
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  
-      function applyTheme(t) { root.setAttribute('data-theme', t); }
-  
-      const stored = localStorage.getItem(storageKey);
-      const initial = stored === 'light' || stored === 'dark'
-        ? stored
-        : (mq.matches ? 'dark' : 'light');
-      applyTheme(initial);
-  
-      // Se l’utente non ha scelto manualmente, aggiorna quando cambia il tema di sistema
-      mq.addEventListener?.('change', e => {
-        if (!localStorage.getItem(storageKey)) applyTheme(e.matches ? 'dark' : 'light');
-      });
-  
-      // Toggle manuale
-      const themeBtn = document.getElementById('themeToggle');
-      themeBtn?.addEventListener('click', () => {
-        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-        localStorage.setItem(storageKey, next);
-      });
-    })();
-  
-    // Sidebar: apri/chiudi + ESC
-    (function () {
-      const sidebar  = document.getElementById('sidebar');
-      const openBtn  = document.getElementById('openMenu');
-      const closeBtn = document.getElementById('closeMenu');
-  
-      function open()  { sidebar.classList.add('open');  sidebar.setAttribute('aria-hidden','false'); }
-      function close() { sidebar.classList.remove('open'); sidebar.setAttribute('aria-hidden','true'); }
-  
-      openBtn?.addEventListener('click', open);
-      closeBtn?.addEventListener('click', close);
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-  
-      // Chiudi la sidebar quando si clicca un link interno
-      sidebar?.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => { if (a.getAttribute('href')?.startsWith('#') || a.origin === location.origin) close(); });
-      });
-    })();
-  </script>
-
+</body>
+</html>
