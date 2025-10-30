@@ -45,7 +45,6 @@
       --card-bg:#ffffff; --card-fg:#111111;
     }
 
-    /* abilita animazione della proprietà angolare del bordo */
     @property --angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 
     *{box-sizing:border-box}
@@ -100,7 +99,6 @@
       display:grid; grid-template-columns:repeat(2,1fr); gap:20px; padding:2.2rem; background:var(--surface-color);
     }
 
-    /* ---------- CARDS ---------- */
     .nav-card{
       position:relative; background:var(--card-bg); border:2px solid transparent; border-radius:var(--card-radius);
       padding:1.4rem; text-align:center; transition:transform .2s ease, background .2s ease, color .2s ease;
@@ -111,33 +109,28 @@
     .nav-card:hover{transform:translateY(-2px)}
     .nav-card > * { position: relative; z-index: 1; }
 
-    /* Bordi statici */
     .nav-liltalks{border-color:var(--liltalks-border)}
     .nav-cinelilo{border-color:var(--cinelilo-border)}
     .nav-autog{border-color:var(--autog-border)}
     .nav-liloscambio{border-color:var(--liloscambio-base)}
 
-    /* Hover “riempimento” uniforme */
     .nav-liltalks:hover{ background:#0a2b4f; color:#fff; }
     .nav-cinelilo:hover{ background:#4a0a0a; color:#fff; }
     .nav-autog:hover{ background:#2f1a0e; color:#fff; }
     .nav-liloscambio:hover{ background:var(--liloscambio-hover); color:#fff; }
     .nav-card:hover h3, .nav-card:hover p{ color:#fff; }
 
-    /* ---------- TICKETS: bordo spesso arcobaleno + fill oro in hover ---------- */
+    /* ---------- TICKETS ---------- */
     .nav-tickets{
-      background: var(--card-bg);      /* bianco/nero come le altre */
+      background: var(--card-bg);
       border-color: transparent;
-      overflow: visible;               /* importante: per mostrare l’anello fuori dalla card */
+      overflow: visible;
     }
     .nav-tickets::before{
-      content:""; position:absolute;
-      inset:-7px;                                  /* come nella versione compact */
-      border-radius:calc(var(--card-radius) + 7px);
+      content:""; position:absolute; inset:-7px; border-radius:calc(var(--card-radius) + 7px);
       background: conic-gradient(from var(--angle),
-        #ff004c, #ff7a00, #ffd400, #21d300, #00d0ff, #7a00ff, #ff00a8, #ff004c
-      );
-      padding:7px;                                 /* spessore bordo */
+        #ff004c,#ff7a00,#ffd400,#21d300,#00d0ff,#7a00ff,#ff00a8,#ff004c);
+      padding:7px;
       -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite:xor; mask-composite:exclude;
       animation: rainbowShift 5s linear infinite;
@@ -147,49 +140,40 @@
 
     .nav-tickets::after{
       content:""; position:absolute; inset:6px; border-radius:calc(var(--card-radius) - 2px);
-      background: transparent; transition: background .25s ease;
-      z-index: 0;
+      background: transparent; transition: background .25s ease; z-index: 0;
     }
     .nav-tickets:hover::after{
-      background: linear-gradient(135deg,
-        #fffbe8 0%,
-        #ffeaa6 18%,
-        #ffd96a 38%,
-        #ffcf3c 55%,
-        #f7b80a 75%,
-        #e0a000 100%
-      );
+      background: linear-gradient(135deg,#fffbe8 0%,#ffeaa6 18%,#ffd96a 38%,#ffcf3c 55%,#f7b80a 75%,#e0a000 100%);
     }
     .nav-tickets:hover{ color:#111; }
     .nav-tickets:hover h3, .nav-tickets:hover p, .nav-tickets:hover div{ color:#111; }
 
-    /* disattiva le “bolle” decorative (i due puntini) ovunque */
     .bubble{display:none}
-    .nav-card .bubble:before, .nav-card .bubble:after{display:none}
 
-    a.cardlink{color:inherit; text-decoration:none}
+    .rainbow-text{
+      background: conic-gradient(from var(--angle),
+        #ff004c,#ff7a00,#ffd400,#21d300,#00d0ff,#7a00ff,#ff00a8,#ff004c);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent; -webkit-text-fill-color: transparent;
+      animation: rainbowShift 5s linear infinite; font-weight:800;
+      text-shadow: 0 0 0.8px rgba(0,0,0,.25);
+    }
+    .nav-tickets:hover .rainbow-text{ color:transparent; -webkit-text-fill-color:transparent; }
 
-    /* Testo arcobaleno animato per la parola "Feste" */
-.rainbow-text{
-  background: conic-gradient(from var(--angle),
-    #ff004c, #ff7a00, #ffd400, #21d300, #00d0ff, #7a00ff, #ff00a8, #ff004c);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: rainbowShift 5s linear infinite; /* usa già la @keyframes esistente */
-  font-weight: 800;
-  text-shadow: 0 0 0.8px rgba(0,0,0,.25); /* leggero contorno per leggibilità */
-}
+    /* ---------- SEZIONE CHI SIAMO ---------- */
+    .section{
+      background:var(--surface-color);
+      border-radius:var(--card-radius);
+      box-shadow:var(--box-shadow);
+      padding:20px;
+      margin:26px auto;
+      max-width:980px;
+    }
+    .section h2{ margin:.2rem 0 1rem; font-weight:700; color:var(--primary-color); }
+    .section p{ margin:.4rem 0; color:var(--text-color); }
+    .section a{ color:var(--link); text-decoration:none; }
+    .section a:hover{ text-decoration:underline; }
 
-/* Evita che l’hover della card sovrascriva il testo arcobaleno */
-.nav-tickets:hover .rainbow-text{
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-
-    /* ---------- FOOTER ---------- */
     footer{
       margin:24px auto; max-width:980px; padding:16px 20px; color:var(--text-color-secondary);
       display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between;
@@ -198,22 +182,18 @@
     .footer-links a{color:var(--text-color-secondary); text-decoration:none}
     .footer-links a:hover{text-decoration:underline}
 
-    /* ---------- RESPONSIVE ---------- */
     @media (max-width:900px){
       .button-grid{grid-template-columns:1fr; padding:1.2rem}
       .nav-card{height:auto; min-height:180px}
       .hero-logo{width:180px;height:180px}
       footer{padding:16px}
-
-      /* LiLoScambio: niente crop su mobile */
-      .nav-liloscambio{ min-height: 200px; padding-block: 1.6rem; }
+      .nav-liloscambio{ min-height:200px; padding-block:1.6rem; }
       .nav-liloscambio img{ width:84px; height:84px; object-fit:contain; }
       .nav-liloscambio p{ margin-top:.3rem; line-height:1.4; }
     }
   </style>
 </head>
 <body>
-  <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -221,15 +201,15 @@
     </div>
     <nav class="side-links">
       <a href="/">Home</a>
+      <a href="#chi-siamo">Chi siamo</a>
       <a href="/tickets">Biglietti / Feste</a>
-      <a href="/liltalks/index.html">LiLtalks</a>
-      <a href="/cinelilo/index.html">CineLiLo</a>
-      <a href="/autogestite/autogestite.html">Autogestite</a>
-      <a href="/contatti.html">Contatti</a>
+      <a href="/liltalks/">LiLtalks</a>
+      <a href="/cinelilo/">CineLiLo</a>
+      <a href="/autogestite/">Autogestite</a>
+      <a href="/contatti">Contatti</a>
     </nav>
   </aside>
 
-  <!-- HEADER -->
   <header class="header">
     <button class="iconbtn" id="openMenu" aria-label="Apri menu">☰</button>
     <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
@@ -238,7 +218,6 @@
     </div>
   </header>
 
-  <!-- MAIN -->
   <main class="main-content">
     <div class="hero"><div class="hero-logo" aria-hidden="true"></div></div>
     <h1 class="main-title">Comitato LiLo</h1>
@@ -248,8 +227,6 @@
       <p style="text-align:center; margin:0 0 1.4rem">Clicca per vederli nel dettaglio</p>
 
       <div class="button-grid">
-
-        <!-- 1) VENDITA BIGLIETTI FESTE -->
         <a class="cardlink" href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
           <div class="nav-card nav-tickets">
             <div class="bubble"></div>
@@ -261,61 +238,29 @@
             </div>
           </div>
         </a>
-
-        <!-- 2) LILTALKS -->
-        <a class="cardlink" href="/liltalks/">
-          <div class="nav-card nav-liltalks">
-            <div class="bubble"></div>
-            <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
-              <img src="/img/logo-liltalks.png" alt="LiLtalks" style="max-width:100%;max-height:100%;object-fit:contain">
-            </div>
-            <h3>LiLtalks</h3>
-          </div>
-        </a>
-
-        <!-- 3) CINELILO -->
-        <a class="cardlink" href="/cinelilo/">
-          <div class="nav-card nav-cinelilo">
-            <div class="bubble"></div>
-            <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
-              <img src="/img/logo-cinelilo.png" alt="CineLiLo" style="max-width:100%;max-height:100%;object-fit:contain">
-            </div>
-            <h3>CineLiLo</h3>
-          </div>
-        </a>
-
-        <!-- 4) AUTOGESTITE -->
-        <a class="cardlink" href="/autogestite/">
-          <div class="nav-card nav-autog">
-            <div class="bubble"></div>
-            <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
-              <img src="/img/logo-autogestite.png" alt="Autogestite" style="max-width:100%;max-height:100%;object-fit:contain">
-            </div>
-            <h3>Autogestite</h3>
-          </div>
-        </a>
-
-        <!-- 5) LILOSCMBIO -->
+        <a class="cardlink" href="/liltalks/"><div class="nav-card nav-liltalks"><h3>LiLtalks</h3></div></a>
+        <a class="cardlink" href="/cinelilo/"><div class="nav-card nav-cinelilo"><h3>CineLiLo</h3></div></a>
+        <a class="cardlink" href="/autogestite/"><div class="nav-card nav-autog"><h3>Autogestite</h3></div></a>
         <a class="cardlink" href="https://liloscambio.ch/default.php" target="_blank" rel="noopener">
           <div class="nav-card nav-liloscambio">
-            <div class="bubble"></div>
-            <div style="display:flex;align-items:center;gap:1rem;justify-content:center;flex-direction:column;text-align:center;height:100%">
-              <div style="width:80px;height:80px;display:grid;place-items:center">
-                <img src="/img/logo-liloscambio.png" alt="LiLoScambio" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:50%">
-              </div>
-              <h3 style="font-size:1.5rem;font-weight:700;margin:0">LiLoScambio</h3>
-              <p style="font-size:.9rem;opacity:.85;max-width:90%;margin:.2rem auto 0">
-                Piattaforma indipendente degli studenti per scambiarsi riassunti e appunti.
-              </p>
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+              <h3>LiLoScambio</h3>
+              <p style="font-size:.9rem;opacity:.85;max-width:90%">Piattaforma indipendente degli studenti per scambiarsi riassunti e appunti.</p>
             </div>
           </div>
         </a>
-
       </div>
     </div>
+
+    <!-- SEZIONE CHI SIAMO -->
+    <section id="chi-siamo" class="section">
+      <h2>Chi siamo</h2>
+      <p>Siamo il Comitato Studenti del Liceo di Locarno. Organizziamo eventi, attività culturali e sociali per la comunità scolastica.</p>
+      <p>Per contatti e comunicazioni ufficiali usa sempre la pagina dedicata: <a href="/contatti">comitatolilo.ch/contatti</a>.</p>
+      <p>LiLoScambio è un progetto esterno e indipendente, creato da studenti del Liceo. Non è sviluppato né gestito da noi; privacy, condizioni e responsabilità sono indicate esclusivamente sul loro sito.</p>
+    </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-links">
       <a href="/contatti">Contatti</a>
@@ -326,37 +271,20 @@
   </footer>
 
   <script>
-    // Tema: sistema di default; scelta utente se presente
     (function initTheme(){
-      const root = document.documentElement;
-      const stored = localStorage.getItem('theme');
-      if (stored === 'light' || stored === 'dark') {
-        root.setAttribute('data-theme', stored);
-      } else {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-      }
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      mq.addEventListener?.('change', e => {
-        if (!localStorage.getItem('theme')) {
-          document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
-      });
+      const root=document.documentElement;
+      const stored=localStorage.getItem('theme');
+      if(stored==='light'||stored==='dark')root.setAttribute('data-theme',stored);
+      else root.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      const mq=window.matchMedia('(prefers-color-scheme: dark)');
+      mq.addEventListener?.('change',e=>{if(!localStorage.getItem('theme'))document.documentElement.setAttribute('data-theme',e.matches?'dark':'light');});
     })();
-
-    // Sidebar
-    const sidebar = document.getElementById('sidebar');
-    document.getElementById('openMenu').addEventListener('click', ()=>{ sidebar.classList.add('open'); sidebar.setAttribute('aria-hidden','false'); });
-    document.getElementById('closeMenu').addEventListener('click', ()=>{ sidebar.classList.remove('open'); sidebar.setAttribute('aria-hidden','true'); });
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape') sidebar.classList.remove('open'); });
-
-    // Toggle tema
-    const root = document.documentElement;
-    document.getElementById('themeToggle').addEventListener('click', ()=>{
-      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
+    const sidebar=document.getElementById('sidebar');
+    document.getElementById('openMenu').addEventListener('click',()=>{sidebar.classList.add('open');sidebar.setAttribute('aria-hidden','false');});
+    document.getElementById('closeMenu').addEventListener('click',()=>{sidebar.classList.remove('open');sidebar.setAttribute('aria-hidden','true');});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')sidebar.classList.remove('open');});
+    const root=document.documentElement;
+    document.getElementById('themeToggle').addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);localStorage.setItem('theme',next);});
   </script>
 </body>
 </html>
