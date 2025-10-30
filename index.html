@@ -109,7 +109,6 @@
     }
     .nav-card h3{margin:.6rem 0 0; font-weight:700; color:var(--card-fg)}
     .nav-card:hover{transform:translateY(-2px)}
-    /* assicura che il contenuto resti sopra ai pseudo-element */
     .nav-card > * { position: relative; z-index: 1; }
 
     /* Bordi statici */
@@ -118,7 +117,7 @@
     .nav-autog{border-color:var(--autog-border)}
     .nav-liloscambio{border-color:var(--liloscambio-base)}
 
-    /* Hover “riempimento” uniforme stile LiLoScambio */
+    /* Hover “riempimento” uniforme */
     .nav-liltalks:hover{ background:#0a2b4f; color:#fff; }
     .nav-cinelilo:hover{ background:#4a0a0a; color:#fff; }
     .nav-autog:hover{ background:#2f1a0e; color:#fff; }
@@ -127,25 +126,25 @@
 
     /* ---------- TICKETS: bordo spesso arcobaleno + fill oro in hover ---------- */
     .nav-tickets{
-      background: var(--card-bg);           /* bianco/nero come le altre card */
-      border-color: transparent;            /* il bordo lo disegniamo con ::before */
-      overflow: hidden;
+      background: var(--card-bg);      /* bianco/nero come le altre */
+      border-color: transparent;
+      overflow: visible;               /* importante: per mostrare l’anello fuori dalla card */
     }
-    /* Bordo spesso arcobaleno che gira lungo tutto il perimetro */
     .nav-tickets::before{
-      content:""; position:absolute; inset:-10px; border-radius:calc(var(--card-radius) + 10px);
+      content:""; position:absolute;
+      inset:-7px;                                  /* come nella versione compact */
+      border-radius:calc(var(--card-radius) + 7px);
       background: conic-gradient(from var(--angle),
         #ff004c, #ff7a00, #ffd400, #21d300, #00d0ff, #7a00ff, #ff00a8, #ff004c
       );
-      padding:10px; /* spessore bordo */
+      padding:7px;                                 /* spessore bordo */
       -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude; /* buca il centro per lasciare la card */
-      animation: rainbowShift 6s linear infinite;
+      -webkit-mask-composite:xor; mask-composite:exclude;
+      animation: rainbowShift 5s linear infinite;
       z-index: 0;
     }
     @keyframes rainbowShift { to { --angle: 360deg; } }
 
-    /* Riempimento oro in hover, con un tocco di bianco */
     .nav-tickets::after{
       content:""; position:absolute; inset:6px; border-radius:calc(var(--card-radius) - 2px);
       background: transparent; transition: background .25s ease;
@@ -161,19 +160,12 @@
         #e0a000 100%
       );
     }
-    /* Testo scuro in hover sulla card oro per leggibilità */
     .nav-tickets:hover{ color:#111; }
     .nav-tickets:hover h3, .nav-tickets:hover p, .nav-tickets:hover div{ color:#111; }
 
-    /* bolle soft (decorative) */
-    .nav-card .bubble:before,.nav-card .bubble:after{content:''; position:absolute; top:50%; width:20px; height:20px; border-radius:50%; z-index:-2; opacity:.7}
-    .nav-card .bubble:before{left:-20px; transform:translate(-50%,-50%)} 
-    .nav-card .bubble:after{right:-20px; transform:translate(50%,-50%)}
-    .nav-liltalks .bubble:before,.nav-liltalks .bubble:after{background:#4a90e2}
-    .nav-cinelilo .bubble:before,.nav-cinelilo .bubble:after{background:#ff5858}
-    .nav-autog   .bubble:before,.nav-autog   .bubble:after{background:#dca15c}
-    .nav-liloscambio .bubble:before,.nav-liloscambio .bubble:after{background:var(--liloscambio-base)}
-    .nav-tickets .bubble:before,.nav-tickets .bubble:after{background:#00d0ff}
+    /* disattiva le “bolle” decorative (i due puntini) ovunque */
+    .bubble{display:none}
+    .nav-card .bubble:before, .nav-card .bubble:after{display:none}
 
     a.cardlink{color:inherit; text-decoration:none}
 
@@ -189,7 +181,7 @@
     /* ---------- RESPONSIVE ---------- */
     @media (max-width:900px){
       .button-grid{grid-template-columns:1fr; padding:1.2rem}
-      .nav-card{height:auto; min-height:180px} /* altezza flessibile */
+      .nav-card{height:auto; min-height:180px}
       .hero-logo{width:180px;height:180px}
       footer{padding:16px}
 
@@ -237,7 +229,7 @@
 
       <div class="button-grid">
 
-        <!-- 1) VENDITA BIGLIETTI FESTE – bordo spesso arcobaleno animato + hover oro -->
+        <!-- 1) VENDITA BIGLIETTI FESTE -->
         <a class="cardlink" href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
           <div class="nav-card nav-tickets">
             <div class="bubble"></div>
