@@ -4,21 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contatti – Comitato Liceo Locarno</title>
+
+  <!-- Asset condivisi -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="/assets/app.css">
   <script defer src="/assets/app.js"></script>
+
   <style>
-    /* Loader personalizzato solo per questa pagina */
+    /* Loader solo per questa pagina */
     #loading-screen {
-      position: fixed; inset: 0;
+      position: fixed;
+      inset: 0;
       background: var(--background-color, #0b0b0f);
-      display: flex; justify-content: center; align-items: center;
-      z-index: 9999; opacity: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
       transition: opacity .35s ease;
     }
     #loading-logo {
       background-image: url(/img/logo-comitatolilo.png);
-      width: 160px; height: 160px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
@@ -29,11 +37,15 @@
     main.main { padding-top: 80px; display: grid; place-items: center; }
     .card {
       width: min(880px, 92vw);
-      background: var(--card-bg);
+      background: rgba(17,19,24,.75);
       color: var(--card-fg);
-      border-radius: 14px;
+      border-radius: var(--card-radius);
       box-shadow: var(--box-shadow);
+      backdrop-filter: blur(8px);
       padding: 1.6rem;
+    }
+    [data-theme="light"] .card {
+      background: rgba(255,255,255,.75);
     }
     h1 { margin: .2rem 0 1rem; }
     .row { display: grid; gap: 12px; }
@@ -51,7 +63,7 @@
 <body>
   <div id="loading-screen"><div id="loading-logo"></div></div>
 
-  <!-- SIDEBAR -->
+  <!-- MENU LATERALE -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -76,6 +88,7 @@
     </div>
   </header>
 
+  <!-- CONTENUTO -->
   <main class="main">
     <section class="card">
       <h1>Contatti</h1>
@@ -106,7 +119,7 @@
   </footer>
 
   <script>
-    // Loader fade-out
+    // Loader fade-out (solo per questa pagina)
     window.addEventListener('load', () => {
       const loader = document.getElementById('loading-screen');
       setTimeout(() => {
