@@ -6,79 +6,106 @@
   <title>Contatti – Comitato LiLo</title>
   <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
 
-  <!-- Asset condivisi -->
+  <!-- Stili e script condivisi -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="/assets/app.css">
   <script defer src="/assets/app.js"></script>
 
   <style>
-    /* Layout interno specifico per i contatti */
-    main.main { padding-top: 80px; display: grid; place-items: center; }
-  
+    :root{
+      --page-max: 980px;
+      --page-vw: 92vw;
+    }
+
+    main.main { padding-top: 84px; }
+
+    .container{
+      width: min(var(--page-max), var(--page-vw));
+      margin: 0 auto;
+    }
+
     .card {
-      width: min(880px, 92vw);
       background: var(--surface-color);
       color: var(--text-color);
       border-radius: var(--card-radius);
       box-shadow: var(--box-shadow);
+      backdrop-filter: blur(8px);
       padding: 1.8rem;
     }
-  
+
     h1 {
-      margin: .2rem 0 1.2rem;
+      margin: .2rem 0 1.4rem;
       text-align: center;
       color: var(--primary-color);
     }
-  
+
     .row {
       display: grid;
       gap: 18px;
     }
-  
+
     .item {
       padding: 1.2rem 1.4rem;
       border-radius: 18px;
       background: color-mix(in oklab, var(--surface-color) 90%, transparent);
-      backdrop-filter: blur(6px);
-      border: 2px solid rgba(255,255,255,.08);
-      box-shadow:
-        0 3px 10px rgba(0,0,0,.15),
-        inset 0 0 10px rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 3px 10px rgba(0,0,0,.12);
       transition: all .25s ease;
+      cursor: default;
     }
-  
-    .item:hover {
-      transform: translateY(-2px);
+
+    .item:hover, .item:focus-visible {
+      background: rgba(255,255,255,.06);
       border-color: rgba(255,255,255,.18);
-      box-shadow:
-        0 6px 18px rgba(0,0,0,.25),
-        inset 0 0 14px rgba(255,255,255,.06);
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      transform: translateY(-2px);
+      outline: none;
     }
-  
+
+    [data-theme="light"] .item {
+      background: rgba(0,0,0,.03);
+      border-color: #00000010;
+    }
+    [data-theme="light"] .item:hover {
+      background: rgba(0,0,0,.05);
+      border-color: #00000022;
+    }
+
     .item strong {
       display: block;
       margin-bottom: .3rem;
       color: var(--primary-color);
     }
-  
+
     a {
       color: var(--link);
       text-decoration: none;
     }
-  
+
     a:hover {
       text-decoration: underline;
     }
-  
+
     @media (min-width:760px){
       .row { grid-template-columns: repeat(2, 1fr); }
     }
-  </style>
 
+    /* Allineamento del footer con il contenitore */
+    footer > .footer-inner{
+      width: min(var(--page-max), var(--page-vw));
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
 </head>
+
 <body>
 
-  <!-- SIDEBAR -->
+  <!-- MENU LATERALE -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -86,7 +113,7 @@
     </div>
     <nav class="side-links">
       <a href="/">Home</a>
-      <a href="/">Chi siamo</a>
+      <a href="/#chi-siamo">Chi siamo</a>
       <a href="/tickets">Biglietti / Feste</a>
       <a href="/autogestite/">Autogestite</a>
       <a href="/liltalks/">LiLtalks</a>
@@ -106,39 +133,44 @@
 
   <!-- CONTENUTO -->
   <main class="main">
-    <section class="card">
-      <h1>Contatti</h1>
-      <div class="row">
-        <div class="item">
-          <strong>Comunicazioni generali</strong>
-          <p>Se necessitate di aiuto, <a href="mailto:comitatolilo@gmail.com">contattaci qui</a>.</p>
+    <div class="container">
+      <section class="card">
+        <h1>Contatti</h1>
+        <div class="row">
+          <div class="item">
+            <strong>Comunicazioni generali</strong>
+            <p>Se necessitate di aiuto, <a href="/contatti">contattaci qui</a>.</p>
+          </div>
+          <div class="item">
+            <strong>Instagram</strong>
+            <a href="https://www.instagram.com/lil.octopuss" target="_blank" rel="noopener">
+              Apri il profilo Instagram
+            </a>
+          </div>
+          <div class="item">
+            <strong>Biglietti / Eventi</strong>
+            <a href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
+              Vai a tickets.comitatolilo.ch
+            </a>
+          </div>
         </div>
-        <div class="item">
-          <strong>Instagram</strong>
-          <a href="https://www.instagram.com/lil.octopuss" target="_blank" rel="noopener">
-            Apri il profilo Instagram
-          </a>
-        </div>
-        <div class="item">
-          <strong>Biglietti / Eventi</strong>
-          <a href="https://tickets.comitatolilo.ch" target="_blank" rel="noopener">
-            Vai a tickets.comitatolilo.ch
-          </a>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-links">
-      <a href="/contatti">Contatti</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/imprint">Imprint</a>
-    </div>
-    <div>
-      © <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="/contatti">Contatti</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/imprint">Imprint</a>
+      </div>
+      <div>
+        © <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a>
+      </div>
     </div>
   </footer>
+
 </body>
 </html>
