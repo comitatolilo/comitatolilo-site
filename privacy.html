@@ -8,9 +8,28 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="/assets/app.css">
   <script defer src="/assets/app.js"></script>
+  <style>
+    main { padding-top: 84px; }
+    .wrap { width: min(980px, 92vw); margin: 0 auto; }
+    .paper {
+      background: var(--surface-color);
+      color: var(--text-color);
+      border-radius: var(--card-radius);
+      box-shadow: var(--box-shadow);
+      backdrop-filter: blur(8px);
+      padding: 1.6rem 1.4rem;
+    }
+    h1 { margin: .2rem 0 1.2rem; color: var(--primary-color); }
+    h2 { margin: 1.2rem 0 .6rem; font-size: 1.2rem; }
+    h3 { margin: 1rem 0 .5rem; font-size: 1.05rem; }
+    p, ul { margin: .3rem 0 .9rem; color: var(--text-color-secondary); }
+    ul { padding-left: 1.2rem; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
-  <!-- SIDEBAR -->
+  <!-- MENU LATERALE -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -36,7 +55,7 @@
     </div>
   </header>
 
-  <main class="main-content">
+  <main>
     <div class="wrap">
       <article class="paper">
         <h1>Privacy</h1>
@@ -49,13 +68,13 @@
         <p>Il sito può contenere collegamenti verso piattaforme esterne utilizzate per attività specifiche, come biglietteria o condivisione di appunti. Visitandole, si applicano le rispettive condizioni e informative privacy.</p>
 
         <h3>2.1 Biglietteria online</h3>
-        <p>La gestione dei biglietti avviene tramite pretix.eu (raggiungibile da tickets.comitatolilo.ch) che tratta i dati necessari all’acquisto secondo la normativa applicabile e standard europei di protezione dei dati. Informativa: <a href="https://pretix.eu/about/en/privacy" target="_blank" rel="noopener">privacy di pretix.eu</a>.</p>
+        <p>La gestione dei biglietti avviene tramite pretix.eu (raggiungibile da tickets.comitatolilo.ch) che tratta i dati necessari all’acquisto secondo la normativa applicabile e gli standard europei di protezione dei dati. Informativa: <a href="https://pretix.eu/about/en/privacy" target="_blank" rel="noopener">privacy di pretix.eu</a>.</p>
 
         <h3>2.2 LiLoScambio</h3>
         <p>LiLoScambio è un progetto indipendente degli studenti (liloscambio.ch). Non è sviluppato né gestito dal Comitato; condizioni e privacy sono disponibili direttamente sul loro sito.</p>
 
         <h2>3. Cookie</h2>
-        <p>Vengono impiegati esclusivamente cookie tecnici essenziali, ad esempio per ricordare il tema chiaro/scuro. Non utilizziamo cookie di profilazione o analitici di terze parti.</p>
+        <p>Utilizziamo esclusivamente cookie tecnici essenziali, ad esempio per ricordare il tema chiaro/scuro. Non impieghiamo cookie di profilazione o analitici di terze parti.</p>
 
         <h2>4. Sicurezza delle comunicazioni</h2>
         <p>Le comunicazioni sono protette tramite HTTPS. Nonostante le misure adottate, ogni trasmissione via Internet può presentare vulnerabilità.</p>
