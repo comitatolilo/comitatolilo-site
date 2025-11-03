@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CineLiLo – Comitato LiLo</title>
+  <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/app.css">
+  <script defer src="/assets/app.js"></script>
+  <style>
+    main { padding-top: 84px; }
+
+    /* Hero poster full-bleed con overlay per leggibilità */
+    .hero-poster{
+      position: relative;
+      min-height: clamp(52vh, 60vh, 72vh);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: var(--card-radius);
+      width: min(1100px, 95vw);
+      margin: 0 auto 18px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      background: #000;
+    }
+    .hero-poster::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image: url("/img/cinelilo/mamma-ho-perso-laereo-cover.jpg");
+      background-size: cover; background-position: center;
+      filter: brightness(.6) saturate(1.1);
+      transform: scale(1.04);
+    }
+    .hero-poster::after{
+      /* velatura gradiente per migliorare contrasto */
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.55) 100%);
+    }
+    .hero-content{
+      position: relative;
+      text-align: center;
+      padding: 1.2rem;
+      color: #fff;
+    }
+    .hero-title{
+      margin: 0 0 .4rem;
+      font-size: clamp(1.8rem, 4.8vw, 3rem);
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+    .hero-sub{
+      margin: 0;
+      font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+      font-weight: 600;
+      opacity: .96;
+    }
+
+    /* Card info in stile bubble (come Imprint/Privacy) */
+    .wrap { width: min(980px, 92vw); margin: 0 auto; }
+    .paper{
+      background: var(--surface-color);
+      color: var(--text-color);
+      border-radius: var(--card-radius);
+      box-shadow: var(--box-shadow);
+      backdrop-filter: blur(8px);
+      padding: 1.6rem 1.4rem;
+      margin: 12px auto 0;
+    }
+    .paper h2{ margin: .2rem 0 .75rem; color: var(--primary-color); font-size: 1.2rem; }
+    .meta{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+    }
+    .meta .item{
+      background: rgba(255,255,255,.03);
+      border: 1px solid #ffffff14;
+      border-radius: 12px;
+      padding: .9rem 1rem;
+      color: var(--text-color-secondary);
+    }
+    [data-theme="light"] .meta .item{
+      background: rgba(0,0,0,.03);
+      border-color: #00000010;
+    }
+    .meta .label{ display:block; font-weight:600; color: var(--primary-color); margin-bottom: .25rem; }
+    .notice{
+      margin: .8rem 0 0;
+      padding: 1rem 1.1rem;
+      border: 1px dashed #ffffff33;
+      border-radius: 12px;
+      color: var(--text-color);
+      background: rgba(255,255,255,.04);
+      text-align: center;
+      font-weight: 600;
+    }
+    [data-theme="light"] .notice{
+      background: rgba(0,0,0,.03);
+      border-color: #00000022;
+    }
+
+    @media (max-width: 720px){
+      .meta{ grid-template-columns: 1fr; }
+      .hero-poster{ min-height: 52vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MENU LATERALE -->
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="side-header">
+      <div class="side-title"><a href="/">Comitato Lilo</a></div>
+      <button id="closeMenu" class="iconbtn" aria-label="Chiudi menu">✕</button>
+    </div>
+    <nav class="side-links">
+      <a href="/">Home</a>
+      <a href="/#chi-siamo">Chi siamo</a>
+      <a href="/tickets">Biglietti / Feste</a>
+      <a href="/autogestite/">Autogestite</a>
+      <a href="/liltalks/">LiLtalks</a>
+      <a href="/cinelilo/">CineLiLo</a>
+      <a href="/contatti">Contatti</a>
+    </nav>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="header">
+    <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
+    <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
+    <div class="right">
+      <button id="themeToggle" class="iconbtn" aria-label="Cambia tema">🌓</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero con poster di sfondo -->
+    <section class="hero-poster" aria-label="CineLiLo – Serata Cinema">
+      <div class="hero-content">
+        <h1 class="hero-title">CineLiLo</h1>
+        <p class="hero-sub">Mamma ho perso l’aereo</p>
+      </div>
+    </section>
+
+    <!-- Card informazioni evento (nessun link nel contenuto) -->
+    <div class="wrap">
+      <article class="paper" aria-labelledby="info-title">
+        <h2 id="info-title">Informazioni</h2>
+        <div class="meta">
+          <div class="item">
+            <span class="label">Data</span>
+            <div>Da definire</div>
+          </div>
+          <div class="item">
+            <span class="label">Luogo</span>
+            <div>Aula Magna – Liceo di Locarno</div>
+          </div>
+          <div class="item">
+            <span class="label">Proiezione</span>
+            <div>Film: “Mamma ho perso l’aereo”</div>
+          </div>
+          <div class="item">
+            <span class="label">Organizzazione</span>
+            <div>Iniziativa CineLiLo</div>
+          </div>
+        </div>
+
+        <p class="notice">Data e iscrizioni verranno presto comunicate.</p>
+      </article>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/imprint">Imprint</a>
+    </div>
+    <div>© <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a></div>
+  </footer>
+
+</body>
+</html>
