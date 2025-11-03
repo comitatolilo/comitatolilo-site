@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LiLtalks – Comitato LiLo</title>
+  <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
+
+  <!-- Asset condivisi -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/app.css">
+  <script defer src="/assets/app.js"></script>
+
+  <style>
+    :root{
+      --page-max: 980px;
+      --page-vw: 92vw;
+    }
+
+    main { padding-top: 84px; }
+
+    /* Contenitore allineato a header/footer */
+    .container{
+      width: min(var(--page-max), var(--page-vw));
+      margin: 0 auto;
+    }
+
+    /* Hero semplice */
+    .hero{
+      background: rgba(17,19,24,.75);
+      backdrop-filter: blur(8px);
+      border-radius: var(--card-radius);
+      box-shadow: var(--box-shadow);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    [data-theme="light"] .hero{ background: rgba(255,255,255,.75); }
+    .hero h1{
+      margin: .1rem 0 .35rem;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      color: var(--primary-color);
+    }
+    .hero p{
+      margin: 0;
+      color: var(--text-color-secondary);
+    }
+
+    /* Card principale (bubble) */
+    .paper{
+      background: var(--surface-color);
+      color: var(--text-color);
+      border-radius: var(--card-radius);
+      box-shadow: var(--box-shadow);
+      backdrop-filter: blur(8px);
+      padding: 1.4rem;
+    }
+
+    .grid{
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 760px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Riquadri selezionabili in stile “bubble” */
+    .item{
+      padding: 1.1rem 1.2rem;
+      border-radius: 18px;
+      background: color-mix(in oklab, var(--surface-color) 90%, transparent);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 3px 10px rgba(0,0,0,.12);
+      transition: all .25s ease;
+      cursor: default;
+    }
+    .item:hover, .item:focus-visible{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      transform: translateY(-2px);
+      outline: none;
+    }
+    [data-theme="light"] .item{
+      background: rgba(0,0,0,.03);
+      border-color: #00000010;
+    }
+    [data-theme="light"] .item:hover{
+      background: rgba(0,0,0,.05);
+      border-color: #00000022;
+    }
+
+    .item h2{
+      margin: 0 0 .35rem;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+    }
+    .item p{
+      margin: 0 0 .6rem;
+      color: var(--text-color-secondary);
+    }
+    .item a{
+      text-decoration: none;
+      color: var(--link);
+    }
+    .item a:hover{ text-decoration: underline; }
+
+    /* Box video in evidenza (facoltativo) */
+    .featured{
+      margin-top: 4px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .video-embed{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+    .video-embed iframe{
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* Footer allineato alla stessa larghezza */
+    footer > .footer-inner{
+      width: min(var(--page-max), var(--page-vw));
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="side-header">
+      <div class="side-title"><a href="/">Comitato Lilo</a></div>
+      <button id="closeMenu" class="iconbtn" aria-label="Chiudi menu">✕</button>
+    </div>
+    <nav class="side-links">
+      <a href="/">Home</a>
+      <a href="/#chi-siamo">Chi siamo</a>
+      <a href="/tickets">Biglietti / Feste</a>
+      <a href="/autogestite/">Autogestite</a>
+      <a href="/liltalks/">LiLtalks</a>
+      <a href="/cinelilo/">CineLiLo</a>
+      <a href="/contatti">Contatti</a>
+    </nav>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="header">
+    <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
+    <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
+    <div class="right">
+      <button id="themeToggle" class="iconbtn" aria-label="Cambia tema">🌓</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1>LiLtalks</h1>
+        <p>Contenuti e iniziative sulla vita culturale del Liceo.</p>
+      </section>
+
+      <article class="paper">
+        <div class="grid">
+          <!-- YouTube -->
+          <div class="item">
+            <h2>YouTube</h2>
+            <p>Podcast, approfondimenti e contenuti video di LiLtalks.</p>
+            <p><a href="https://www.youtube.com/" target="_blank" rel="noopener">Apri il canale YouTube</a></p>
+
+            <!-- Facoltativo: video in evidenza (sostituisci VIDEO_ID_HERE con l’ID del video) -->
+            <div class="featured">
+              <div class="video-embed">
+                <iframe
+                  src="https://www.youtube.com/embed/VIDEO_ID_HERE"
+                  title="Video in evidenza LiLtalks"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instagram -->
+          <div class="item">
+            <h2>Instagram</h2>
+            <p>Aggiornamenti, annunci e dietro le quinte di LiLtalks.</p>
+            <p><a href="https://www.instagram.com/" target="_blank" rel="noopener">Apri la pagina Instagram</a></p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="/contatti">Contatti</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/imprint">Imprint</a>
+      </div>
+      <div>
+        © <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
