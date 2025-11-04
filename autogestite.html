@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Autogestite – Comitato LiLo</title>
+  <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
+
+  <!-- Asset condivisi -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/app.css">
+  <script defer src="/assets/app.js"></script>
+
+  <style>
+    :root{
+      --page-max: 980px;
+      --page-vw: 92vw;
+    }
+
+    main{ padding-top:84px; }
+    .container{ width:min(var(--page-max), var(--page-vw)); margin:0 auto; }
+
+    /* Intro bubble */
+    .bubble{
+      background: color-mix(in oklab, var(--surface-color) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-radius: var(--card-radius);
+      box-shadow: var(--box-shadow);
+      padding: 1.8rem 1.4rem;
+      margin: 2rem 0 1rem;
+      border:1px solid rgba(255,255,255,.08);
+      text-align:center;
+      color: var(--text-color);
+      transition: filter .2s ease;
+      user-select:text;
+    }
+    .bubble:hover{ filter: brightness(1.03); }
+    h1{ margin:0 0 .5rem; font-size:clamp(1.8rem,4vw,2.4rem); color:var(--primary-color); }
+    .subtitle{ margin:.1rem 0 0; color:var(--text-color-secondary); }
+
+    /* Griglia info (come CineLiLo) */
+    .info{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      margin: 1.2rem 0 2rem;
+    }
+    .info .item{
+      background: rgba(255,255,255,.03);
+      border: 1px solid #ffffff14;
+      border-radius: 12px;
+      padding: .9rem 1rem;
+      color: var(--text-color-secondary);
+      line-height: 1.45;
+      transition: filter .2s ease, transform .2s ease, border .2s ease, box-shadow .2s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,.12), inset 0 0 10px rgba(255,255,255,.04);
+      user-select:text;
+    }
+    .info .item:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.22);
+      box-shadow: 0 6px 18px rgba(0,0,0,.22), inset 0 0 14px rgba(255,255,255,.06);
+      filter: brightness(1.04);
+    }
+    [data-theme="light"] .info .item{
+      background: rgba(0,0,0,.03);
+      border-color:#00000010;
+    }
+    .label{ display:block; font-weight:600; color:var(--primary-color); margin-bottom:.25rem; }
+
+    /* Azioni */
+    .actions{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: .6rem 0 2.2rem;
+    }
+    @media (max-width:760px){
+      .info{ grid-template-columns: 1fr; }
+      .actions{ grid-template-columns: 1fr; }
+    }
+
+    .cta{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:1rem 1.1rem;
+      border-radius:16px;
+      background: color-mix(in oklab, var(--surface-color) 88%, transparent);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 3px 10px rgba(0,0,0,.15), inset 0 0 10px rgba(255,255,255,.04);
+      text-decoration:none; color:var(--text-color);
+      transition: transform .2s ease, border .2s ease, box-shadow .2s ease, filter .2s ease;
+      user-select:text;
+    }
+    .cta:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 6px 18px rgba(0,0,0,.25), inset 0 0 14px rgba(255,255,255,.06);
+      filter: brightness(1.04);
+    }
+
+    .cta .txt{ display:flex; flex-direction:column; gap:4px; }
+    .cta .txt strong{ color:var(--primary-color); font-size:1.05rem; }
+    .cta .txt span{ color:var(--text-color-secondary); font-size:.95rem; }
+
+    .cta .btn{
+      padding:.55rem .9rem; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--text-color); text-decoration:none; white-space:nowrap; font-weight:600;
+    }
+    [data-theme="light"] .cta .btn{ background: rgba(0,0,0,.05); border-color:#00000014; }
+
+    /* Stato "presto" disabilitato */
+    .cta[aria-disabled="true"]{
+      pointer-events:none; opacity:.72;
+    }
+    .badge{
+      font-size:.8rem; font-weight:600; padding:.25rem .5rem; border-radius:10px;
+      background: rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.18);
+      color: var(--text-color);
+    }
+    [data-theme="light"] .badge{ background: rgba(0,0,0,.05); border-color:#00000014; }
+
+    /* Contenitore footer allineato */
+    footer > .footer-inner{
+      width:min(var(--page-max), var(--page-vw));
+      margin:0 auto;
+      display:flex; flex-wrap:wrap; gap:10px 18px;
+      align-items:center; justify-content:space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MENU LATERALE -->
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="side-header">
+      <div class="side-title"><a href="/">Comitato Lilo</a></div>
+      <button id="closeMenu" class="iconbtn" aria-label="Chiudi menu">✕</button>
+    </div>
+    <nav class="side-links">
+      <a href="/">Home</a>
+      <a href="/#chi-siamo">Chi siamo</a>
+      <a href="/tickets">Biglietti / Feste</a>
+      <a href="/autogestite/">Autogestite</a>
+      <a href="/liltalks/">LiLtalks</a>
+      <a href="/cinelilo/">CineLiLo</a>
+      <a href="/contatti">Contatti</a>
+    </nav>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="header">
+    <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
+    <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
+    <div class="right"><button id="themeToggle" class="iconbtn" aria-label="Cambia tema">🌓</button></div>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Intro -->
+      <section class="bubble">
+        <h1>Autogestite</h1>
+        <p class="subtitle">Tema: Disney • 30–31 marzo • Liceo di Locarno</p>
+      </section>
+
+      <!-- Info sintetiche -->
+      <section class="info" aria-label="Dettagli">
+        <div class="item">
+          <span class="label">Date</span>
+          <div>30 e 31 marzo</div>
+        </div>
+        <div class="item">
+          <span class="label">Luogo</span>
+          <div>Liceo di Locarno</div>
+        </div>
+        <div class="item">
+          <span class="label">Tema</span>
+          <div>Disney</div>
+        </div>
+        <div class="item">
+          <span class="label">Organizzazione</span>
+          <div>Comitato Studenti Liceo Locarno</div>
+        </div>
+      </section>
+
+      <!-- Azioni -->
+      <section class="actions" aria-label="Azioni">
+        <a class="cta" href="https://forms.gle/maBADxWwpfG1i9HE7" target="_blank" rel="noopener">
+          <div class="txt">
+            <strong>Proponi un’idea</strong>
+            <span>Scatola delle idee (Google Form)</span>
+          </div>
+          <span class="btn">Apri modulo</span>
+        </a>
+
+        <div class="cta" aria-disabled="true">
+          <div class="txt">
+            <strong>Iscrivi un’attività</strong>
+            <span>Modulo di iscrizione</span>
+          </div>
+          <span class="badge">Presto disponibile</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="/contatti">Contatti</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/imprint">Imprint</a>
+      </div>
+      <div>© <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
