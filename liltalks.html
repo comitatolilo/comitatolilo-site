@@ -66,36 +66,18 @@
       filter: brightness(1.04);
     }
 
-    /* Contenitore icone */
+    /* Icone */
     .icon-wrap{
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      width:56px; height:56px;
+      display:flex; align-items:center; justify-content:center;
       border-radius:14px;
       background: rgba(0,0,0,.15);
       overflow:hidden;
     }
     [data-theme="light"] .icon-wrap{ background: rgba(0,0,0,.06); }
 
-    /* YouTube proporzionato */
-    .icon-wrap.youtube{
-      aspect-ratio:71/50;
-      width:72px;
-      max-width:90px;
-      min-width:68px;
-      border-radius:10px;
-    }
-    .icon-wrap.youtube svg{ width:100%; height:auto; display:block; }
-
-    /* Instagram quadrato */
-    .icon-wrap.instagram{
-      width:56px;
-      height:56px;
-    }
-    .icon-wrap.instagram img{
-      width:32px;
-      height:32px;
-      display:block;
+    .icon-wrap svg, .icon-wrap img{
+      width:36px; height:auto; display:block;
     }
 
     /* Tema */
@@ -117,7 +99,7 @@
 </head>
 <body>
 
-  <!-- SIDEBAR -->
+  <!-- MENU LATERALE -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -153,12 +135,12 @@
       <section class="social-grid">
         <!-- YouTube -->
         <a class="social-card" href="https://www.youtube.com/@liltalkspodcast" target="_blank" rel="noopener">
-          <div class="icon-wrap youtube" aria-hidden="true">
-            <svg class="icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 50">
+          <div class="icon-wrap" aria-hidden="true">
+            <svg class="icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 50" preserveAspectRatio="xMidYMid meet">
               <rect width="71" height="50" rx="8" fill="#fff"/>
               <polygon points="28,12 28,38 52,25" fill="#111"/>
             </svg>
-            <svg class="icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 50">
+            <svg class="icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 50" preserveAspectRatio="xMidYMid meet">
               <rect width="71" height="50" rx="8" fill="#000"/>
               <polygon points="28,12 28,38 52,25" fill="#fff"/>
             </svg>
@@ -171,7 +153,7 @@
 
         <!-- Instagram -->
         <a class="social-card" href="https://www.instagram.com/liltalks.lilo/" target="_blank" rel="noopener">
-          <div class="icon-wrap instagram" aria-hidden="true">
+          <div class="icon-wrap" aria-hidden="true">
             <img class="icon-dark" alt="" src="/img/tools/instagram-white-icon.svg">
             <img class="icon-light" alt="" src="/img/tools/instagram-black-icon.svg">
           </div>
