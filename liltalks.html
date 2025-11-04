@@ -6,7 +6,6 @@
   <title>LiLtalks – Comitato LiLo</title>
   <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
 
-  <!-- Asset condivisi -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="/assets/app.css">
   <script defer src="/assets/app.js"></script>
@@ -19,15 +18,12 @@
     }
     [data-theme="light"]{ --bg-image: url("/img/liltalks-bg-light.jpg"); }
 
-    /* Sfondo a tutta pagina che segue il tema */
     body{ background: var(--bg-image) center/cover fixed no-repeat; }
-
     main{ padding-top:84px; }
 
-    /* Contenitore pagina allineato a footer */
     .container{ width:min(var(--page-max), var(--page-vw)); margin:0 auto; }
 
-    /* Bubble introduttivo (titolo + descrizione) */
+    /* Bubble introduttivo centrato */
     .bubble{
       background: color-mix(in oklab, var(--surface-color) 88%, transparent);
       backdrop-filter: blur(8px);
@@ -36,14 +32,14 @@
       padding: 1.8rem 1.4rem;
       margin: 2rem 0 1rem;
       border:1px solid rgba(255,255,255,.08);
-      transition: filter .2s ease, background .2s ease, border .2s ease;
+      text-align:center;
       color: var(--text-color);
     }
     .bubble:hover{ filter: brightness(1.03); }
     h1{ margin:0 0 .5rem; font-size:clamp(1.8rem,4vw,2.4rem); color:var(--primary-color); }
     .subtitle{ margin:0; color:var(--text-color-secondary); }
 
-    /* Griglia social: due riquadri uguali */
+    /* Griglia social */
     .social-grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -58,42 +54,46 @@
       border-radius:16px;
       background: color-mix(in oklab, var(--surface-color) 88%, transparent);
       border:1px solid rgba(255,255,255,.10);
-      box-shadow:
-        0 3px 10px rgba(0,0,0,.15),
-        inset 0 0 10px rgba(255,255,255,.04);
+      box-shadow: 0 3px 10px rgba(0,0,0,.15), inset 0 0 10px rgba(255,255,255,.04);
       text-decoration:none; color:var(--text-color);
       transition: transform .2s ease, border .2s ease, box-shadow .2s ease, filter .2s ease;
-      user-select:text; /* contenuti evidenziabili anche se non link */
+      user-select:text;
     }
     .social-card:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,.18);
-      box-shadow:
-        0 6px 18px rgba(0,0,0,.25),
-        inset 0 0 14px rgba(255,255,255,.06);
+      box-shadow: 0 6px 18px rgba(0,0,0,.25), inset 0 0 14px rgba(255,255,255,.06);
       filter: brightness(1.04);
     }
 
-    .icon-wrap{
-      width:56px; height:56px; flex:0 0 56px;
-      display:grid; place-items:center;
-      border-radius:14px;
-      background: rgba(0,0,0,.15);
-    }
+    /* Contenitori icona */
+    .icon-wrap{ display:flex; align-items:center; justify-content:center; border-radius:14px; background: rgba(0,0,0,.15); }
     [data-theme="light"] .icon-wrap{ background: rgba(0,0,0,.06); }
 
-    .icon-wrap svg{ width:36px; height:36px; display:block; }
+    /* YouTube è rettangolare: contenitore wide */
+    .icon-wrap.wide{ padding:.35rem .6rem; min-height:56px; }
+    .icon-wrap.wide svg{ height:32px; width:auto; display:block; }
 
-    /* Mostra/occulta la variante di icona secondo il tema */
-    .icon-light{ display:none; }
-    [data-theme="light"] .icon-dark{ display:none; }
-    [data-theme="light"] .icon-light{ display:block; }
+    /* Instagram è quadrato */
+    .icon-wrap.square{ width:56px; height:56px; }
+    .icon-wrap.square img{ width:32px; height:32px; display:block; }
 
-    .label{
-      display:flex; flex-direction:column; gap:4px;
-    }
+    /* Varianti tema: mostra SOLO una icona */
+    .icon-light{ display:none !important; }
+    [data-theme="light"] .icon-dark{ display:none !important; }
+    [data-theme="light"] .icon-light{ display:block !important; }
+
+    .label{ display:flex; flex-direction:column; gap:4px; }
     .label strong{ color:var(--primary-color); font-size:1.05rem; }
     .label span{ color:var(--text-color-secondary); font-size:.95rem; }
+
+    /* Footer allineato al contenitore pagina */
+    footer > .footer-inner{
+      width:min(var(--page-max), var(--page-vw));
+      margin:0 auto;
+      display:flex; flex-wrap:wrap; gap:10px 18px;
+      align-items:center; justify-content:space-between;
+    }
   </style>
 </head>
 <body>
@@ -119,33 +119,31 @@
   <header class="header">
     <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
     <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
-    <div class="right">
-      <button id="themeToggle" class="iconbtn" aria-label="Cambia tema">🌓</button>
-    </div>
+    <div class="right"><button id="themeToggle" class="iconbtn" aria-label="Cambia tema">🌓</button></div>
   </header>
 
   <main>
     <div class="container">
-      <!-- Intro -->
+      <!-- Intro centrato -->
       <section class="bubble">
         <h1>LiLtalks</h1>
         <p class="subtitle">Podcast e contenuti culturali del Liceo di Locarno.</p>
       </section>
 
-      <!-- Social links -->
+      <!-- Social -->
       <section class="social-grid">
-        <!-- YouTube -->
+        <!-- YouTube (SVG inline con proporzioni corrette) -->
         <a class="social-card" href="https://www.youtube.com/@liltalkspodcast" target="_blank" rel="noopener">
-          <div class="icon-wrap" aria-hidden="true">
-            <!-- Variante scura (bianco) -->
-            <svg class="icon-dark" viewBox="0 0 512 512" aria-hidden="true">
-              <rect width="512" height="512" rx="110" fill="#fff"/>
-              <path d="M216 343V169l144 87-144 87z" fill="#111"/>
+          <div class="icon-wrap wide" aria-hidden="true">
+            <!-- Dark: logo bianco su rettangolo chiuso -->
+            <svg class="icon-dark" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="90" height="20" rx="5" fill="#fff"/>
+              <polygon points="38,5 38,15 48,10" fill="#111"/>
             </svg>
-            <!-- Variante chiara (nero) -->
-            <svg class="icon-light" viewBox="0 0 512 512" aria-hidden="true">
-              <rect width="512" height="512" rx="110" fill="#000"/>
-              <path d="M216 343V169l144 87-144 87z" fill="#fff"/>
+            <!-- Light: logo nero -->
+            <svg class="icon-light" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="90" height="20" rx="5" fill="#000"/>
+              <polygon points="38,5 38,15 48,10" fill="#fff"/>
             </svg>
           </div>
           <div class="label">
@@ -154,19 +152,11 @@
           </div>
         </a>
 
-        <!-- Instagram -->
+        <!-- Instagram (file esterni forniti) -->
         <a class="social-card" href="https://www.instagram.com/liltalks.lilo/" target="_blank" rel="noopener">
-          <div class="icon-wrap" aria-hidden="true">
-            <!-- Variante scura: bianco -->
-            <svg class="icon-dark" viewBox="0 0 512 512" aria-hidden="true" role="img">
-              <path fill="#fff" fill-rule="evenodd" d="M170.663 256.157c-.083-47.121 38.055-85.4 85.167-85.483 47.121-.092 85.407 38.03 85.499 85.16.091 47.129-38.047 85.4-85.176 85.492-47.112.09-85.399-38.039-85.49-85.169zm-46.108.091c.141 72.602 59.106 131.327 131.69 131.186 72.592-.141 131.35-59.09 131.209-131.692-.141-72.577-59.114-131.335-131.715-131.194-72.585.141-131.325 59.115-131.184 131.7zm237.104-137.091c.033 16.953 13.817 30.681 30.772 30.648 16.961-.033 30.689-13.811 30.664-30.764-.033-16.954-13.818-30.69-30.78-30.657-16.962.033-30.689 13.818-30.656 30.773zM149.977 1.773c-27.239 1.285-45.843 5.648-62.101 12.018-16.829 6.561-31.095 15.354-45.286 29.604C28.381 57.653 19.655 71.944 13.144 88.79c-6.303 16.299-10.575 34.912-11.778 62.168C.172 178.264-.102 186.973.031 256.489c.133 69.508.439 78.234 1.741 105.547 1.302 27.231 5.649 45.828 12.019 62.093 6.569 16.83 15.353 31.088 29.611 45.288 14.25 14.201 28.55 22.918 45.404 29.438 16.282 6.295 34.902 10.583 62.15 11.778 27.305 1.203 36.022 1.468 105.521 1.335 69.532-.132 78.25-.439 105.555-1.733 27.239-1.303 45.826-5.665 62.1-12.019 16.829-6.586 31.095-15.353 45.288-29.611 14.191-14.251 22.917-28.55 29.428-45.405 6.304-16.282 10.592-34.903 11.777-62.134 1.195-27.322 1.478-36.048 1.344-105.556-.133-69.516-.447-78.225-1.741-105.523-1.294-27.255-5.657-45.844-12.019-62.118-6.577-16.829-15.352-31.079-29.602-45.287-14.25-14.192-28.55-22.935-45.404-29.429-16.29-6.305-34.903-10.601-62.15-11.779C333.747.164 325.03-.102 255.506.031c-69.507.133-78.224.431-105.529 1.742z"/>
-            </svg>
-            <!-- Variante chiara: nero pieno -->
-            <svg class="icon-light" viewBox="0 0 512 512" aria-hidden="true" role="img">
-              <circle cx="256" cy="256" r="110" fill="#000"/>
-              <rect x="96" y="96" width="320" height="320" rx="90" ry="90" fill="none" stroke="#000" stroke-width="40"/>
-              <circle cx="378" cy="134" r="20" fill="#000"/>
-            </svg>
+          <div class="icon-wrap square" aria-hidden="true">
+            <img class="icon-dark" alt="" src="/img/tools/instagram-white-icon.svg">
+            <img class="icon-light" alt="" src="/img/tools/instagram-black-icon.svg">
           </div>
           <div class="label">
             <strong>Instagram</strong>
@@ -179,7 +169,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-inner" style="width:min(var(--page-max),var(--page-vw));margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;">
+    <div class="footer-inner">
       <div class="footer-links">
         <a href="/contatti">Contatti</a>
         <a href="/privacy">Privacy</a>
