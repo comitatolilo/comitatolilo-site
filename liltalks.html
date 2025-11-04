@@ -6,75 +6,89 @@
   <title>LiLtalks – Comitato LiLo</title>
   <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
 
-  <!-- Asset condivisi -->
+  <!-- Stili condivisi -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="/assets/app.css">
   <script defer src="/assets/app.js"></script>
 
   <style>
-    :root{ --page-max: 980px; --page-vw: 92vw; }
+    :root{
+      --page-max: 980px;
+      --page-vw: 92vw;
+      --bg-image: url("/img/liltalks-bg-dark.jpg");
+    }
+    [data-theme="light"]{
+      --bg-image: url("/img/liltalks-bg-light.jpg");
+    }
+
+    body {
+      background: var(--bg-image) center/cover fixed no-repeat;
+    }
+
     main { padding-top: 84px; }
 
-    .container{ width: min(var(--page-max), var(--page-vw)); margin: 0 auto; }
-
-    .hero{
-      background: rgba(17,19,24,.75);
-      backdrop-filter: blur(8px);
-      border-radius: var(--card-radius);
-      box-shadow: var(--box-shadow);
-      padding: 1.2rem 1.4rem;
-      margin-bottom: 14px;
+    .container {
+      width: min(var(--page-max), var(--page-vw));
+      margin: 0 auto;
       text-align: center;
     }
-    [data-theme="light"] .hero{ background: rgba(255,255,255,.75); }
-    .hero h1{ margin: .1rem 0 .35rem; font-size: clamp(1.6rem, 4vw, 2.1rem); color: var(--primary-color); }
-    .hero p{ margin: 0; color: var(--text-color-secondary); }
 
-    .paper{
-      background: var(--surface-color);
-      color: var(--text-color);
+    .bubble {
+      background: color-mix(in oklab, var(--surface-color) 90%, transparent);
+      backdrop-filter: blur(8px);
       border-radius: var(--card-radius);
       box-shadow: var(--box-shadow);
-      backdrop-filter: blur(8px);
-      padding: 1.4rem;
+      padding: 2rem 1.4rem;
+      margin: 3rem auto;
+      color: var(--text-color);
+      max-width: 640px;
+      transition: background .25s ease, border .25s ease;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    [data-theme="light"] .bubble {
+      background: rgba(255,255,255,.7);
+      border-color: #00000010;
     }
 
-    .grid{
-      display: grid;
-      gap: 16px;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
-
-    .item{
-      padding: 1.1rem 1.2rem;
-      border-radius: 18px;
-      background: color-mix(in oklab, var(--surface-color) 90%, transparent);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 3px 10px rgba(0,0,0,.12);
-      transition: all .25s ease;
-      cursor: default;
-    }
-    .item:hover, .item:focus-visible{
+    .bubble:hover {
       background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.18);
-      box-shadow: 0 6px 20px rgba(0,0,0,.25);
       transform: translateY(-2px);
-      outline: none;
     }
-    [data-theme="light"] .item{ background: rgba(0,0,0,.03); border-color: #00000010; }
-    [data-theme="light"] .item:hover{ background: rgba(0,0,0,.05); border-color: #00000022; }
 
-    .item h2{ margin: 0 0 .35rem; font-size: 1.1rem; color: var(--primary-color); }
-    .item p{ margin: 0 0 .6rem; color: var(--text-color-secondary); }
-    .item a{ text-decoration: none; color: var(--link); }
-    .item a:hover{ text-decoration: underline; }
+    h1 {
+      margin: 0 0 .6rem;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: var(--primary-color);
+    }
+    p {
+      margin: 0 0 1.6rem;
+      color: var(--text-color-secondary);
+      font-size: 1rem;
+    }
 
-    .featured{ margin-top: 4px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.10); }
-    .video-embed{ position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
-    .video-embed iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .links a {
+      text-decoration: none;
+      color: var(--link);
+      font-weight: 600;
+      padding: .6rem 1.2rem;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      transition: all .25s ease;
+    }
+    .links a:hover {
+      background: rgba(255,255,255,.1);
+    }
+    [data-theme="light"] .links a:hover {
+      background: rgba(0,0,0,.05);
+    }
 
-    footer > .footer-inner{
+    footer > .footer-inner {
       width: min(var(--page-max), var(--page-vw));
       margin: 0 auto;
       display: flex; flex-wrap: wrap; gap: 10px 18px;
@@ -82,9 +96,10 @@
     }
   </style>
 </head>
+
 <body>
 
-  <!-- SIDEBAR -->
+  <!-- MENU LATERALE -->
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
       <div class="side-title"><a href="/">Comitato Lilo</a></div>
@@ -112,40 +127,14 @@
 
   <main>
     <div class="container">
-      <section class="hero">
+      <div class="bubble">
         <h1>LiLtalks</h1>
-        <p>Contenuti e iniziative sulla vita culturale del Liceo.</p>
-      </section>
-
-      <article class="paper">
-        <div class="grid">
-          <!-- YouTube -->
-          <div class="item">
-            <h2>YouTube</h2>
-            <p>Podcast, approfondimenti e contenuti video.</p>
-            <p><a href="https://www.youtube.com/@liltalkspodcast" target="_blank" rel="noopener">Apri il canale YouTube</a></p>
-
-            <!-- Facoltativo: video in evidenza (sostituisci VIDEO_ID_HERE con l’ID del video) -->
-            <div class="featured">
-              <div class="video-embed">
-                <iframe
-                  src="https://www.youtube.com/embed/VIDEO_ID_HERE"
-                  title="Video in evidenza LiLtalks"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen></iframe>
-              </div>
-            </div>
-          </div>
-
-          <!-- Instagram -->
-          <div class="item">
-            <h2>Instagram</h2>
-            <p>Aggiornamenti, annunci e dietro le quinte.</p>
-            <p><a href="https://www.instagram.com/liltalks.lilo/" target="_blank" rel="noopener">Apri la pagina Instagram</a></p>
-          </div>
+        <p>Podcast e contenuti culturali del Liceo di Locarno.</p>
+        <div class="links">
+          <a href="https://www.youtube.com/@liltalkspodcast" target="_blank" rel="noopener">Canale YouTube</a>
+          <a href="https://www.instagram.com/liltalks.lilo/" target="_blank" rel="noopener">Profilo Instagram</a>
         </div>
-      </article>
+      </div>
     </div>
   </main>
 
@@ -157,9 +146,7 @@
         <a href="/privacy">Privacy</a>
         <a href="/imprint">Imprint</a>
       </div>
-      <div>
-        © <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a>
-      </div>
+      <div>© <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a></div>
     </div>
   </footer>
 
