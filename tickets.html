@@ -47,6 +47,61 @@
     .links { display:flex; flex-wrap:wrap; gap:.6rem 1rem; margin-top:.6rem; }
     .links a { color: var(--link); text-decoration: none; }
     .links a:hover { text-decoration: underline; }
+
+    /* FAQ espandibili */
+    .faq-list {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .faq-item {
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: color-mix(in oklab, var(--surface-color) 96%, transparent);
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+    }
+    .faq-item:hover {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.2);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02);
+    }
+    [data-theme="light"] .faq-item {
+      background: rgba(0,0,0,.02);
+      border-color: #00000014;
+    }
+    [data-theme="light"] .faq-item:hover {
+      background: rgba(0,0,0,.04);
+      border-color: #00000024;
+    }
+    .faq-question {
+      width: 100%;
+      border: 0;
+      margin: 0;
+      padding: .7rem 1rem;
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font: inherit;
+      color: var(--text-color);
+      text-align: left;
+      cursor: pointer;
+    }
+    .faq-label {
+      flex: 1;
+      padding-right: .75rem;
+    }
+    .faq-icon {
+      font-size: 1.1rem;
+      opacity: .8;
+    }
+    .faq-answer {
+      padding: 0 1rem .75rem;
+      font-size: .95rem;
+      color: var(--text-color-secondary);
+    }
   </style>
 </head>
 <body>
@@ -115,6 +170,60 @@
             <a target="_blank" rel="noopener" href="https://tickets.comitatolilo.ch/bluparty25/page/cgc/">Condizioni Generali di Contratto</a>
           </div>
         </div>
+
+        <!-- FAQ espandibili -->
+        <div class="faq-list" aria-label="Domande frequenti">
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-1"
+              data-faq-toggle
+            >
+              <span class="faq-label">Cosa devo portare alla festa?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-1" hidden>
+              Per tutti è obbligatorio portare un documento d’identità valido. Se hai acquistato un biglietto da minorenne,
+              porta anche la tessera IoStudio o un documento equivalente che confermi la tua condizione di studente minorenne.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-2"
+              data-faq-toggle
+            >
+              <span class="faq-label">Il biglietto può essere mostrato dal telefono o va stampato?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-2" hidden>
+              Puoi mostrare il biglietto direttamente dal telefono, assicurandoti che il codice QR sia ben visibile e con luminosità sufficiente.
+              Non è necessario stamparlo, salvo diversa indicazione riportata sul biglietto stesso.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-3"
+              data-faq-toggle
+            >
+              <span class="faq-label">Posso cambiare nome o chiedere il rimborso del biglietto?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-3" hidden>
+              Le modifiche ai dati del biglietto e le richieste di rimborso sono soggette alle Condizioni Generali di Contratto dell’evento.
+              Verifica le condizioni e, in caso di dubbi specifici, <a href="/contatti">contattaci qui</a> prima dell’evento.
+            </div>
+          </div>
+        </div>
       </article>
     </div>
   </main>
@@ -129,5 +238,29 @@
     <div>© <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a></div>
   </footer>
 
+  <script>
+    // FAQ toggle
+    (function () {
+      var toggles = document.querySelectorAll("[data-faq-toggle]");
+      if (!toggles.length) return;
+
+      toggles.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var expanded = btn.getAttribute("aria-expanded") === "true";
+          var answerId = btn.getAttribute("aria-controls");
+          var answer = document.getElementById(answerId);
+          if (!answer) return;
+
+          btn.setAttribute("aria-expanded", expanded ? "false" : "true");
+          answer.hidden = expanded;
+
+          var icon = btn.querySelector(".faq-icon");
+          if (icon) {
+            icon.textContent = expanded ? "▾" : "▴";
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
