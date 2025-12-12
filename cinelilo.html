@@ -74,6 +74,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px 14px;
     }
+
+    /* item standard */
     .item{
       background: rgba(255,255,255,.03);
       border: 1px solid #ffffff14;
@@ -83,6 +85,7 @@
       line-height: 1.5;
       transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
       cursor: default; /* highlight anche se non è link */
+      text-decoration: none;
     }
     .item:hover, .item:active, .item:focus-visible{
       background: rgba(255,255,255,.06);
@@ -102,45 +105,32 @@
       box-shadow: 0 6px 18px rgba(0,0,0,.10);
     }
 
-    .label{ display:block; font-weight:600; color: var(--primary-color); margin-bottom: .2rem; font-size:.95rem; }
+    /* versione a tutta larghezza (Iscrizioni) su desktop */
+    .item--full{
+      grid-column: 1 / -1;
+    }
 
-    .notice{
-      margin: .85rem 0 0;
-      padding: .9rem 1rem;
-      border: 1px dashed #ffffff33;
-      border-radius: 12px;
-      color: var(--text-color);
-      background: rgba(255,255,255,.04);
-      text-align: center;
-      font-weight: 600;
-      font-size: .98rem;
-      transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
-      cursor: default;
-    }
-    .notice:hover, .notice:active, .notice:focus-visible{
-      background: rgba(255,255,255,.06);
-      border-color: #ffffff44;
-      box-shadow: 0 6px 22px rgba(0,0,0,.28);
-      outline: none;
-    }
-    [data-theme="light"] .notice{
-      background: rgba(0,0,0,.03);
-      border-color: #00000022;
-    }
-    [data-theme="light"] .notice:hover,
-    [data-theme="light"] .notice:active,
-    [data-theme="light"] .notice:focus-visible{
-      background: rgba(0,0,0,.04);
-      border-color: #00000030;
-      box-shadow: 0 6px 18px rgba(0,0,0,.10);
+    .label{
+      display:block;
+      font-weight:600;
+      color: var(--primary-color);
+      margin-bottom: .2rem;
+      font-size:.95rem;
     }
 
     @media (max-width: 760px){
       .meta{ grid-template-columns: 1fr; }
+      /* su mobile, item--full occupa comunque solo 1 colonna, come gli altri */
     }
 
     /* Footer: allineamento al container */
-    footer > .footer-inner{ display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between; }
+    footer > .footer-inner{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 18px;
+      align-items:center;
+      justify-content:space-between;
+    }
   </style>
 </head>
 <body>
@@ -180,40 +170,47 @@
       </div>
     </section>
 
-    <!-- Card informazioni evento (nessun link nel contenuto) -->
+    <!-- Card informazioni evento -->
     <div class="container">
       <article class="paper" aria-labelledby="info-title">
         <h2 id="info-title">Informazioni</h2>
+
         <div class="meta">
           <div class="item">
             <span class="label">Data</span>
             <div>18.12.2025</div>
           </div>
+
           <!-- Luogo -->
-          <a href="https://www.locarnofestival.ch/festival/venues/granrex.html" target="_blank" rel="noopener" class="item" style="text-decoration:none;color:inherit;">
+          <a href="https://www.locarnofestival.ch/festival/venues/granrex.html"
+             target="_blank" rel="noopener"
+             class="item">
             <span class="label">Luogo</span>
             <div>Cinema GranRex Locarno</div>
           </a>
+
           <div class="item">
             <span class="label">Proiezione</span>
             <div>Film: “Mamma ho perso l’aereo”</div>
           </div>
+
           <div class="item">
             <span class="label">Organizzazione</span>
             <div>Iniziativa CineLiLo</div>
           </div>
+
+          <!-- Iscrizioni a tutta larghezza -->
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYco9prJj1it1VZ-t_bko7fU32vC4v_8E75_H235jsXXLd1A/viewform"
+             target="_blank" rel="noopener"
+             class="item item--full">
+            <span class="label">Iscrizioni</span>
+            <div>Iscrizioni qui</div>
+          </a>
         </div>
-  
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYco9prJj1it1VZ-t_bko7fU32vC4v_8E75_H235jsXXLd1A/viewform"
-           target="_blank" rel="noopener"
-           class="item"
-           style="text-decoration:none;color:inherit;">
-          <span class="label">Iscrizioni</span>
-          <div>Iscrizioni qui</div>
-        </a>
-      </div>
-    </article>
-  </div>
+
+      </article>
+    </div>
+  </main>
 
   <!-- FOOTER -->
   <footer>
