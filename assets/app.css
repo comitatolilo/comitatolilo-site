@@ -15,6 +15,7 @@
   /* Palette / bordi progetto */
   --tickets-accent:#ffd24d;
   --liltalks-border:#4a90e2; --cinelilo-border:#d81313; --autog-border:#9c5bff;
+  --foto-border:#9c5bff;
   --liloscambio-base:#ba454f; --liloscambio-hover:#8b0014;
 }
 
@@ -157,7 +158,7 @@ html,body{
 /* ============ CARD ============ */
 .nav-card{
   position:relative; background:var(--card-bg); border:2px solid transparent; border-radius:var(--card-radius);
-  padding:1.4rem; text-align:center; transition:transform .2s ease, background .2s ease, color .2s ease;
+  padding:1.4rem; text-align:center; transition:transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
   overflow:hidden; color:var(--card-fg); height:240px; display:flex; flex-direction:column; justify-content:center; align-items:center;
   isolation:isolate;
 }
@@ -169,12 +170,14 @@ html,body{
 .nav-liltalks{ border-color:var(--liltalks-border); }
 .nav-cinelilo{ border-color:var(--cinelilo-border); }
 .nav-autog{ border-color:var(--autog-border); }
+.nav-foto{ border-color:var(--foto-border); }
 .nav-liloscambio{ border-color:var(--liloscambio-base); }
 
 /* Hover fill */
 .nav-liltalks:hover{ background:#0a2b4f; color:#fff; }
 .nav-cinelilo:hover{ background:#4a0a0a; color:#fff; }
 .nav-autog:hover{ background:linear-gradient(135deg,#6c2cff 0%, #4b1fa8 100%); color:#fff; box-shadow:0 10px 28px rgba(76,32,170,.45); }
+.nav-foto:hover{ background:linear-gradient(135deg,#6c2cff 0%, #4b1fa8 100%); color:#fff; box-shadow:0 10px 28px rgba(76,32,170,.45); }
 .nav-liloscambio:hover{ background:var(--liloscambio-hover); color:#fff; }
 .nav-card:hover h3, .nav-card:hover p{ color:#fff; }
 
@@ -242,6 +245,4 @@ footer{
   .nav-card{ height:auto; min-height:180px; }
   .hero-logo{ width:180px; height:180px; }
   footer{ padding:16px; }
-  .nav-liloscambio{ min-height:200px; padding-block:1.6rem; }
-  .nav-liloscambio img{ width:84px; height:84px; object-fit:contain; }
 }
