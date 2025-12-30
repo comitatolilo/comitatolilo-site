@@ -15,7 +15,7 @@
   /* Palette / bordi progetto */
   --tickets-accent:#ffd24d;
   --liltalks-border:#4a90e2; --cinelilo-border:#d81313; --autog-border:#9c5bff;
-  --foto-border:#9c5bff;
+  --foto-border:#ff5bbd;
   --liloscambio-base:#ba454f; --liloscambio-hover:#8b0014;
 }
 
@@ -177,7 +177,7 @@ html,body{
 .nav-liltalks:hover{ background:#0a2b4f; color:#fff; }
 .nav-cinelilo:hover{ background:#4a0a0a; color:#fff; }
 .nav-autog:hover{ background:linear-gradient(135deg,#6c2cff 0%, #4b1fa8 100%); color:#fff; box-shadow:0 10px 28px rgba(76,32,170,.45); }
-.nav-foto:hover{ background:linear-gradient(135deg,#6c2cff 0%, #4b1fa8 100%); color:#fff; box-shadow:0 10px 28px rgba(76,32,170,.45); }
+.nav-foto:hover{background:linear-gradient(135deg,#ff5bbd 0%, #b33cff 100%); color:#fff; box-shadow:0 10px 28px rgba(255,91,189,.35);}
 .nav-liloscambio:hover{ background:var(--liloscambio-hover); color:#fff; }
 .nav-card:hover h3, .nav-card:hover p{ color:#fff; }
 
