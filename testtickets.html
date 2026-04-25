@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Biglietti – Comitato LiLo</title>
+  <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/app.css?v=tickets-prod-1">
+  <script defer src="/assets/app.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://tickets.comitatolilo.ch/liloball26/widget/v2.css" crossorigin>
+  <script type="text/javascript" src="https://tickets.comitatolilo.ch/widget/v2.it.js" async crossorigin></script>
+
+  <style>
+    main { padding-top: 84px; }
+    .wrap { width: min(980px, 92vw); margin: 0 auto; }
+    .paper {
+      background: var(--surface-color);
+      color: var(--text-color);
+      border-radius: var(--card-radius);
+      box-shadow: var(--box-shadow);
+      backdrop-filter: blur(8px);
+      padding: 1.6rem 1.4rem;
+      margin: 0 auto 16px;
+    }
+    h1 { margin: .2rem 0 1rem; color: var(--primary-color); text-align: center; }
+    h2 { margin: .8rem 0 .6rem; font-size: 1.15rem; color: var(--primary-color); }
+    p { margin: .35rem 0 .9rem; color: var(--text-color-secondary); }
+    .muted { font-size: .95rem; opacity: .9; }
+
+    .ticket-box { padding: .6rem 0 0; }
+
+    .note {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: .85rem 1rem;
+      background: color-mix(in oklab, var(--surface-color) 92%, transparent);
+      transition: background .25s ease, border-color .25s ease;
+    }
+    .note:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+    [data-theme="light"] .note { background: rgba(0,0,0,.03); border-color: #00000014; }
+    [data-theme="light"] .note:hover { background: rgba(0,0,0,.05); border-color: #00000024; }
+
+    .links { display:flex; flex-wrap:wrap; gap:.6rem 1rem; margin-top:.6rem; }
+    .links a { color: var(--link); text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+
+    .faq-list {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .faq-item {
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: color-mix(in oklab, var(--surface-color) 96%, transparent);
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+    }
+    .faq-item:hover {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.2);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02);
+    }
+    [data-theme="light"] .faq-item {
+      background: rgba(0,0,0,.02);
+      border-color: #00000014;
+    }
+    [data-theme="light"] .faq-item:hover {
+      background: rgba(0,0,0,.04);
+      border-color: #00000024;
+    }
+    .faq-question {
+      width: 100%;
+      border: 0;
+      margin: 0;
+      padding: .7rem 1rem;
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font: inherit;
+      color: var(--text-color);
+      text-align: left;
+      cursor: pointer;
+    }
+    .faq-label {
+      flex: 1;
+      padding-right: .75rem;
+    }
+    .faq-icon {
+      font-size: 1.1rem;
+      opacity: .8;
+    }
+    .faq-answer {
+      padding: 0 1rem .75rem;
+      font-size: .95rem;
+      color: var(--text-color-secondary);
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <div class="side-header">
+      <div class="side-title"><a href="/">Comitato Lilo</a></div>
+      <button id="closeMenu" class="iconbtn" aria-label="Chiudi menu">✕</button>
+    </div>
+    <nav class="side-links">
+      <a href="/">Home</a>
+      <a href="/#chi-siamo">Chi siamo</a>
+      <a href="/tickets">Biglietti / Feste</a>
+      <a href="https://foto.comitatolilo.ch" target="_blank" rel="noopener">Foto</a>
+      <a href="/autogestite/">Autogestite</a>
+      <a href="/liltalks/">LiLtalks</a>
+      <a href="/cinelilo/">CineLiLo</a>
+      <a href="/contatti">Contatti</a>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <button id="openMenu" class="iconbtn" aria-label="Apri menu">☰</button>
+    <div class="brand"><a href="/">Comitato Liceo Locarno</a></div>
+    <div class="right">
+      <button id="themeToggle" class="iconbtn" aria-label="Cambia tema">🌓</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+
+      <article class="paper" aria-labelledby="titolo">
+        <h1 id="titolo">Biglietti 🚀 liloball</h1>
+        <p class="muted" style="text-align:center">
+          30.05.2026<br>
+          Palexpo Locarno
+        </p>
+      </article>
+
+      <article class="paper ticket-box" aria-label="Shop biglietti">
+        <pretix-widget event="https://tickets.comitatolilo.ch/liloball26/"></pretix-widget>
+        <noscript>
+          <div class="pretix-widget">
+            <div class="pretix-widget-info-message">
+              JavaScript disabilitato. Per accedere allo shop, apri
+              <a target="_blank" rel="noopener" href="https://tickets.comitatolilo.ch/liloball26/">questa pagina</a>.
+            </div>
+          </div>
+        </noscript>
+      </article>
+
+      <article class="paper" aria-labelledby="faq">
+        <h2 id="faq">FAQ e condizioni</h2>
+        <div class="note">
+          <p>
+            Leggi con attenzione le informazioni relative all’evento, prima di comprare il biglietto. In caso di domande o problemi,
+            <a href="/contatti">contattaci qui</a>.
+          </p>
+          <div class="links">
+            <a target="_blank" rel="noopener" href="https://tickets.comitatolilo.ch/liloball26/page/cgc/">Condizioni Generali di Contratto</a>
+          </div>
+        </div>
+
+        <div class="faq-list" aria-label="Domande frequenti">
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-1" data-faq-toggle>
+              <span class="faq-label">Cosa devo portare alla festa?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-1" hidden>
+              Per tutti è obbligatorio portare un documento d’identità valido che corrisponda al biglietto. Se hai acquistato un biglietto da liceale,
+              porta anche la tessera IoStudio. Verranno effettuati controlli automatici e, in caso di abuso, l’accesso potrà essere rifiutato oppure potrà essere imposta una penale.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-orari" data-faq-toggle>
+              <span class="faq-label">Fino a che ora posso entrare? Da che ora apre l’ingresso?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-orari" hidden>
+              L’orario preciso di apertura e chiusura dell’ingresso verrà comunicato prima dell’evento.
+              Dopo l’orario limite non sarà più consentito entrare e non è previsto alcun rimborso se non ti presenti o se arrivi troppo tardi.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-2" data-faq-toggle>
+              <span class="faq-label">Il biglietto può essere mostrato dal telefono o va stampato?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-2" hidden>
+              Non raccomandiamo la stampa del biglietto. Ti consigliamo di salvarlo direttamente su Apple/Google Wallet oppure come PDF sul telefono,
+              assicurandoti che il codice QR sia ben visibile e con luminosità sufficiente.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-3" data-faq-toggle>
+              <span class="faq-label">I biglietti sono nominativi?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-3" hidden>
+              I biglietti sono nominali e non possono essere modificati, rivenduti o rimborsati.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-rifiuto" data-faq-toggle>
+              <span class="faq-label">Cosa succede se la sicurezza non mi fa entrare o mi hanno buttato fuori? Rimborsate il biglietto?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-rifiuto" hidden>
+              Per motivi organizzativi e di costi non possiamo rimborsare il biglietto in nessun caso.
+              Se la sicurezza ti nega l’accesso, significa che non sussistono le condizioni per garantirti un ingresso sicuro.
+              Le ragioni più comuni includono stato di ebbrezza, comportamenti inappropriati oppure episodi avvenuti durante serate precedenti.
+              La sicurezza e gli organizzatori possono riservarsi in qualsiasi momento il diritto di negare l’accesso alla festa
+              per garantire l’ordine e la sicurezza di tutti i partecipanti.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-4" data-faq-toggle>
+              <span class="faq-label">Sarà disponibile il guardaroba?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-4" hidden>
+              Le informazioni sul guardaroba verranno comunicate prima dell’evento.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-6" data-faq-toggle>
+              <span class="faq-label">Ci sarà una zona esterna o zona fumatori?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-6" hidden>
+              Le informazioni sulle aree esterne e sulla zona fumatori verranno comunicate prima dell’evento. È vietato fumare all’interno e nelle aree non autorizzate
+              e non è consentito portare all’interno bicchieri o bottiglie di vetro.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-7" data-faq-toggle>
+              <span class="faq-label">I minorenni possono partecipare?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-7" hidden>
+              Sì, i minorenni possono partecipare. L’età minima per l’ingresso verrà comunicata nelle condizioni dell’evento.
+              All’ingresso verrà richiesto un documento d’identità valido; senza documento l’accesso può essere rifiutato.
+              Restano valide tutte le norme legali sul consumo di alcolici per i minorenni.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-8" data-faq-toggle>
+              <span class="faq-label">Posso trasferire il mio biglietto a un amico?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-8" hidden>
+              No, i biglietti sono strettamente nominali e legati ai dati inseriti in fase di acquisto. Non è possibile cambiare intestatario
+              o trasferire il biglietto a terzi.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-9" data-faq-toggle>
+              <span class="faq-label">Cosa succede se perdo il biglietto o non trovo più l’email?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-9" hidden>
+              Per prima cosa controlla la posta indesiderata e le cartelle promozioni. Se ancora non lo trovi,
+              <a href="/contatti">contattaci qui</a> indicando nome, cognome, data di nascita e indirizzo e-mail usati per l’acquisto.
+              Verificheremo la tua prenotazione e ti aiuteremo a recuperare il biglietto.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-10" data-faq-toggle>
+              <span class="faq-label">Posso acquistare più biglietti in un unico ordine?</span>
+              <span class="faq-icon" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-answer" id="faq-10" hidden>
+              Sì, è possibile acquistare più biglietti nello stesso ordine, fino al limite indicato nello shop.
+              Assicurati di inserire i dati corretti per ogni partecipante, perché i biglietti sono nominali e non modificabili.
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/contatti">Contatti</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/imprint">Imprint</a>
+    </div>
+    <div>© <a href="/imprint" style="color:inherit;text-decoration:none">Comitato Studenti Liceo Locarno</a></div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggles = document.querySelectorAll("[data-faq-toggle]");
+      if (!toggles.length) return;
+
+      toggles.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var expanded = btn.getAttribute("aria-expanded") === "true";
+          var answerId = btn.getAttribute("aria-controls");
+          var answer = document.getElementById(answerId);
+          if (!answer) return;
+
+          btn.setAttribute("aria-expanded", expanded ? "false" : "true");
+          answer.hidden = expanded;
+
+          var icon = btn.querySelector(".faq-icon");
+          if (icon) {
+            icon.textContent = expanded ? "▾" : "▴";
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
