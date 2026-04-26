@@ -100,10 +100,90 @@
       font-size: .95rem;
       color: var(--text-color-secondary);
     }
+
+    .info-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(8px);
+    }
+
+    .info-popup.is-visible {
+      display: flex;
+    }
+
+    .info-popup-card {
+      width: min(420px, 92vw);
+      background: var(--surface-color);
+      color: var(--text-color);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 18px;
+      box-shadow: var(--box-shadow);
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .info-popup-card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+
+    .info-popup-card p {
+      margin-bottom: 1rem;
+    }
+
+    .info-popup-actions {
+      display: flex;
+      gap: .7rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .info-popup-actions a,
+    .info-popup-actions button {
+      border: 0;
+      border-radius: 999px;
+      padding: .65rem 1rem;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .info-popup-actions a {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    .info-popup-actions button {
+      background: rgba(255,255,255,.1);
+      color: var(--text-color);
+    }
+
+    [data-theme="light"] .info-popup-actions button {
+      background: rgba(0,0,0,.08);
+    }
   </style>
 </head>
 
 <body>
+
+  <div id="infoPopup" class="info-popup" role="dialog" aria-modal="true" aria-labelledby="infoPopupTitle">
+    <div class="info-popup-card">
+      <h2 id="infoPopupTitle">Ancora troppo presto 👀</h2>
+      <p>
+        Ritorna il 30 alle 8:00 per i biglietti. Vai su insta per lo spoiler della festa.
+      </p>
+      <div class="info-popup-actions">
+        <a href="https://www.instagram.com/lil.octopuss/" target="_blank" rel="noopener">Maggiori info su Instagram</a>
+        <button type="button" id="closeInfoPopup">Chiudi</button>
+      </div>
+    </div>
+  </div>
 
   <aside id="sidebar" class="sidebar" aria-hidden="true">
     <div class="side-header">
@@ -173,8 +253,9 @@
               <span class="faq-icon" aria-hidden="true">▾</span>
             </button>
             <div class="faq-answer" id="faq-1" hidden>
-              Per tutti è obbligatorio portare un documento d’identità valido che corrisponda al biglietto. Se hai acquistato un biglietto da liceale,
-              porta anche la tessera IoStudio. Verranno effettuati controlli automatici e, in caso di abuso, l’accesso potrà essere rifiutato oppure potrà essere imposta una penale.
+              Per tutti è obbligatorio portare un documento d’identità valido che corrisponda ai dati indicati sul biglietto.
+              Senza documento valido l’accesso può essere rifiutato, anche se si è in possesso di un biglietto.
+              Per usufruire della promo drink offerto è necessario presentare la tessera IoStudio.
             </div>
           </div>
 
@@ -184,8 +265,9 @@
               <span class="faq-icon" aria-hidden="true">▾</span>
             </button>
             <div class="faq-answer" id="faq-orari" hidden>
-              L’orario preciso di apertura e chiusura dell’ingresso verrà comunicato prima dell’evento.
-              Dopo l’orario limite non sarà più consentito entrare e non è previsto alcun rimborso se non ti presenti o se arrivi troppo tardi.
+              L’ingresso è possibile dalle 21:00 fino alle 00:30, salvo indicazioni diverse comunicate sui canali ufficiali.
+              Dopo tale orario l’accesso non è più garantito e non è previsto alcun rimborso in caso di mancato ingresso.
+              I maggiorenni che entrano entro le 22:30 avranno diritto a un giro gratuito alla ruota della fortuna.
             </div>
           </div>
 
@@ -206,7 +288,8 @@
               <span class="faq-icon" aria-hidden="true">▾</span>
             </button>
             <div class="faq-answer" id="faq-3" hidden>
-              I biglietti sono nominali e non possono essere modificati, rivenduti o rimborsati.
+              Sì, i biglietti sono nominativi. I dati indicati sul biglietto devono corrispondere alla persona che si presenta all’ingresso.
+              Non sono consentiti cambi nominativo, scambi, trasferimenti, rivendite o rimborsi.
             </div>
           </div>
 
@@ -230,7 +313,8 @@
               <span class="faq-icon" aria-hidden="true">▾</span>
             </button>
             <div class="faq-answer" id="faq-4" hidden>
-              Le informazioni sul guardaroba verranno comunicate prima dell’evento.
+              Sì, sarà disponibile il guardaroba. Può essere acquistato a prezzo scontato online insieme alla prevendita.
+              Sul posto il servizio sarà disponibile salvo esaurimento o diversa indicazione comunicata prima dell’evento.
             </div>
           </div>
 
@@ -251,7 +335,7 @@
               <span class="faq-icon" aria-hidden="true">▾</span>
             </button>
             <div class="faq-answer" id="faq-7" hidden>
-              Sì, i minorenni possono partecipare. L’età minima per l’ingresso verrà comunicata nelle condizioni dell’evento.
+              Sì, i minorenni possono partecipare se rispettano l’età minima indicata nelle condizioni dell’evento.
               All’ingresso verrà richiesto un documento d’identità valido; senza documento l’accesso può essere rifiutato.
               Restano valide tutte le norme legali sul consumo di alcolici per i minorenni.
             </div>
@@ -327,6 +411,22 @@
           }
         });
       });
+    })();
+
+    (function () {
+      var popup = document.getElementById("infoPopup");
+      var closeBtn = document.getElementById("closeInfoPopup");
+      var endDate = new Date("2026-05-30T00:01:00+02:00");
+
+      if (popup && new Date() < endDate) {
+        popup.classList.add("is-visible");
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          popup.classList.remove("is-visible");
+        });
+      }
     })();
   </script>
 
