@@ -166,6 +166,18 @@
       color: #fff !important;
     }
 
+    .info-popup .info-popup-card .info-popup-actions .popup-instagram-link,
+    .info-popup .info-popup-card .info-popup-actions .popup-instagram-link:link,
+    .info-popup .info-popup-card .info-popup-actions .popup-instagram-link:visited,
+    .info-popup .info-popup-card .info-popup-actions .popup-instagram-link:hover,
+    .info-popup .info-popup-card .info-popup-actions .popup-instagram-link:focus,
+    .info-popup .info-popup-card .info-popup-actions .popup-instagram-link:active {
+      color: #fff !important;
+      background: var(--primary-color) !important;
+      -webkit-text-fill-color: #fff !important;
+      text-decoration: none !important;
+    }
+
     .info-popup-actions button {
       background: rgba(255,255,255,.1);
       color: var(--text-color);
@@ -186,7 +198,7 @@
         Ritorna il 30 alle 8:00 per i biglietti. Vai su insta per lo spoiler della festa.
       </p>
       <div class="info-popup-actions">
-        <a href="https://www.instagram.com/lil.octopuss/" target="_blank" rel="noopener">Maggiori info su Instagram</a>
+        <a class="popup-instagram-link" href="https://www.instagram.com/lil.octopuss/" target="_blank" rel="noopener">Maggiori info su insta</a>
         <button type="button" id="closeInfoPopup">Chiudi</button>
       </div>
     </div>
