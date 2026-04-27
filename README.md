@@ -1,4 +1,4 @@
-# Comitato LiLo
+# comitatolilo.ch
 sito ufficiale del comitato studenti liceo Locarno
 
 Questo profilo GitHub raccoglie i progetti digitali legati al Comitato Studenti del Liceo di Locarno.
