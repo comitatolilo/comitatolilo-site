@@ -180,6 +180,66 @@
 
 <body>
 
+  <!-- BLOCKING POPUP -->
+<div style="
+position:fixed;
+inset:0;
+z-index:99999;
+background:rgba(0,0,0,0.75);
+backdrop-filter:blur(8px);
+display:flex;
+align-items:center;
+justify-content:center;
+">
+
+  <div style="
+    width:min(520px,92vw);
+    background:var(--surface-color);
+    color:var(--text-color);
+    border-radius:16px;
+    padding:2rem 1.5rem;
+    text-align:center;
+    box-shadow:0 25px 80px rgba(0,0,0,0.6);
+  ">
+
+    <h2 style="margin:0 0 0.8rem;color:var(--primary-color);">
+      Grazie e buone vacanze
+    </h2>
+
+    <p style="margin:0 0 1.2rem;color:var(--text-color-secondary);">
+      Grazie per il supporto. Ci vediamo alla prossima festa.
+    </p>
+
+    <div style="display:flex;flex-direction:column;gap:0.8rem;align-items:center;">
+
+      <a href="https://instagram.com/lil.octopuss"
+         target="_blank"
+         rel="noopener"
+         style="
+          color:var(--link);
+          text-decoration:none;
+          font-weight:600;
+         ">
+        Instagram
+      </a>
+
+      <a href="/"
+         style="
+          background:var(--primary-color);
+          color:var(--background-color);
+          padding:0.6rem 1.2rem;
+          border-radius:10px;
+          text-decoration:none;
+          font-weight:600;
+         ">
+        Torna alla home
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
   <div id="infoPopup" class="info-popup" role="dialog" aria-modal="true" aria-labelledby="infoPopupTitle">
     <div class="info-popup-card">
       <h2 id="infoPopupTitle">Ancora troppo presto 👀</h2>
