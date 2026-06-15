@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -7,6 +8,13 @@
   <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="/assets/app.css">
+  <style>
+    @media (min-width:901px) {
+      .button-grid { grid-template-columns:repeat(6,minmax(0,1fr)); }
+      .button-grid > .cardlink { grid-column:span 2; }
+      .button-grid > .cardlink:nth-child(4) { grid-column:2 / span 2; }
+    }
+  </style>
   <script defer src="/assets/app.js"></script>
 </head>
 <body>
@@ -107,16 +115,6 @@
             <h3>CineLiLo</h3>
           </div>
         </a>
-
-        <!-- 6) LiLoScambio -->
-        <a class="cardlink" href="https://liloscambio.ch/default.php" target="_blank" rel="noopener">
-          <div class="nav-card nav-liloscambio">
-            <div style="width:120px;height:120px;display:grid;place-items:center;margin:0 auto">
-              <img src="/img/logo-liloscambio.png" alt="LiLoScambio" style="max-width:100%;max-height:100%;object-fit:contain">
-            </div>
-            <h3>LiLoScambio</h3>
-          </div>
-        </a>
       </div>
     </div>
 
@@ -139,3 +137,4 @@
   </footer>
 </body>
 </html>
+```
