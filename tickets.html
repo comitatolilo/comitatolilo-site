@@ -94,6 +94,56 @@
       font-size: .95rem;
       color: var(--text-color-secondary);
     }
+    .glossy-glow-heading {
+      font-size: 5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin: 0;
+      
+      /* Glossy Metallic Gradient Text Effect */
+      background: linear-gradient(
+        110deg,
+        #ffffff 35%,
+        #e0f7fa 48%,
+        #ffffff 50%,
+        #b2ebf2 52%,
+        #ffffff 65%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      /* Combined animations: glossy sheen sweep + pulsing aura glow */
+      animation: 
+        glossyShine 3.5s linear infinite,
+        whiteGlow 2s ease-in-out infinite alternate;
+    }
+
+    /* Moves the light reflection across the text */
+    @keyframes glossyShine {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    /* Pulsing neon white aura */
+    @keyframes whiteGlow {
+      from {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 20px rgba(255, 255, 255, 0.5))
+                drop-shadow(0 0 35px rgba(220, 245, 255, 0.3));
+      }
+      to {
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 30px rgba(255, 255, 255, 0.8))
+                drop-shadow(0 0 55px rgba(255, 255, 255, 0.6))
+                drop-shadow(0 0 85px rgba(200, 235, 255, 0.4));
+      }
+    }
   </style>
 </head>
 
@@ -174,7 +224,7 @@ justify-content:center;
   <div class="wrap">
 
     <article class="paper">
-      <h1>White Pary</h1>
+      <h1 class="glossy-glow-heading">WHITE PARTY</h1>
       <p class="muted" style="text-align:center">
         30.05.2026 · Palexpo Locarno
       </p>
