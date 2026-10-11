@@ -6,11 +6,11 @@
   <title>Biglietti – Comitato LiLo</title>
   <link rel="icon" type="image/png" href="/img/logo-comitatolilo.png">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
-  <link rel="stylesheet" href="/assets/app.css?v=tickets-prod-1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Oswald:wght@500;700&display=swap">
+  <link rel="stylesheet" href="/assets/app.css?v=tickets-bandnight-1">
   <script defer src="/assets/app.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="https://tickets.comitatolilo.ch/white/widget/v2.css" crossorigin>
+  <link rel="stylesheet" type="text/css" href="https://tickets.comitatolilo.ch/bandnight/widget/v2.css" crossorigin>
   <script type="text/javascript" src="https://tickets.comitatolilo.ch/widget/v2.it.js" async crossorigin></script>
 
   <style>
@@ -25,8 +25,8 @@
       padding: 1.6rem 1.4rem;
       margin: 0 auto 16px;
     }
-    h1 { margin: .2rem 0 1rem; color: var(--primary-color); text-align: center; }
-    h2 { margin: .8rem 0 .6rem; font-size: 1.15rem; color: var(--primary-color); }
+    h1 { margin: .2rem 0 1rem; color: #ff2a2a; text-align: center; }
+    h2 { margin: .8rem 0 .6rem; font-size: 1.15rem; color: #ff2a2a; }
     p { margin: .35rem 0 .9rem; color: var(--text-color-secondary); }
     .muted { font-size: .95rem; opacity: .9; }
 
@@ -94,55 +94,25 @@
       font-size: .95rem;
       color: var(--text-color-secondary);
     }
-    .glossy-glow-heading {
-      font-size: 5rem;
-      font-weight: 900;
+    .punk-heading {
+      font-family: 'Oswald', 'Poppins', sans-serif;
+      font-size: clamp(2.4rem, 10vw, 5rem);
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 6px;
+      letter-spacing: .12em;
       margin: 0;
-      
-      /* Glossy Metallic Gradient Text Effect */
-      background: linear-gradient(
-        110deg,
-        #ffffff 35%,
-        #e0f7fa 48%,
-        #ffffff 50%,
-        #b2ebf2 52%,
-        #ffffff 65%
-      );
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-
-      /* Combined animations: glossy sheen sweep + pulsing aura glow */
-      animation: 
-        glossyShine 3.5s linear infinite,
-        whiteGlow 2s ease-in-out infinite alternate;
+      color: #ff2a2a;
+      transform: rotate(-1.4deg);
+      text-shadow:
+        3px 3px 0 #111,
+        -2px -1px 0 #ffea00,
+        0 0 18px rgba(255, 42, 42, .45);
     }
-
-    /* Moves the light reflection across the text */
-    @keyframes glossyShine {
-      0% {
-        background-position: 200% center;
-      }
-      100% {
-        background-position: -200% center;
-      }
-    }
-
-    /* Pulsing neon white aura */
-    @keyframes whiteGlow {
-      from {
-        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
-                drop-shadow(0 0 20px rgba(255, 255, 255, 0.5))
-                drop-shadow(0 0 35px rgba(220, 245, 255, 0.3));
-      }
-      to {
-        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1))
-                drop-shadow(0 0 30px rgba(255, 255, 255, 0.8))
-                drop-shadow(0 0 55px rgba(255, 255, 255, 0.6))
-                drop-shadow(0 0 85px rgba(200, 235, 255, 0.4));
-      }
+    [data-theme="light"] .punk-heading {
+      text-shadow:
+        3px 3px 0 #111,
+        -2px -1px 0 #ffea00,
+        0 0 10px rgba(255, 42, 42, .2);
     }
   </style>
 </head>
@@ -224,20 +194,20 @@ justify-content:center;
   <div class="wrap">
 
     <article class="paper">
-      <h1 class="glossy-glow-heading">WHITE PARTY</h1>
+      <h1 class="punk-heading">BAND NIGHT</h1>
       <p class="muted" style="text-align:center">
-        22.08.2026 · Lido di Ascona
+        16.10.2026 · Spazio ELLE, Locarno
       </p>
     </article>
 
     <article class="paper ticket-box">
-      <pretix-widget event="https://tickets.comitatolilo.ch/white/"></pretix-widget>
+      <pretix-widget event="https://tickets.comitatolilo.ch/bandnight/"></pretix-widget>
 
       <noscript>
         <div class="pretix-widget">
           <div class="pretix-widget-info-message">
             JavaScript disabilitato. Apri
-            <a target="_blank" rel="noopener" href="https://tickets.comitatolilo.ch/white/">qui</a>.
+            <a target="_blank" rel="noopener" href="https://tickets.comitatolilo.ch/bandnight/">qui</a>.
           </div>
         </div>
       </noscript>
